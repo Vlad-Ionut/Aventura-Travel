@@ -1,0 +1,49 @@
+#tab-orar{
+border-collapse:collapse;
+border:5px double var(--culoare-principala);
+width:100%;
+}
+
+#tab-orar th,
+#tab-orar td{
+border:1px solid var(--culoare-accent);
+padding:5px;
+text-align:center;
+}
+
+#tab-orar caption{
+caption-side:bottom;
+font-weight:bold;
+padding:5px;
+}
+
+#tab-orar td:nth-child(odd),
+#tab-orar th:nth-child(odd){
+color:var(--culoare-principala);
+}
+
+#tab-orar td:nth-child(even),
+#tab-orar th:nth-child(even){
+color:var(--culoare-accent);
+}
+
+#tab-orar tbody tr{
+transition:all 0.75s;
+}
+
+#tab-orar tbody tr:hover{
+background:var(--culoare-background);
+color:white;
+}
+
+#tab-orar tbody tr:hover td{
+border:5px solid var(--culoare-highlight);
+}
+
+.tab-scroll{
+overflow-x:auto;
+}
+
+.tab-inner{
+min-width:700px;
+}

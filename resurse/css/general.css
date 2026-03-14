@@ -1,0 +1,15 @@
+:root{
+	--culoare-principala:#05386B;
+	--culoare-background:#ACE0F9;
+	--culoare-accent:#379683;
+	--culoare-highlight:#00FFBF;
+	--culoare-text:#F5F5F5;
+}
+
+body{
+font-family: "Oswald", sans-serif;
+}
+
+h1, h2{
+font-family: "Archivo Black", sans-serif;
+}

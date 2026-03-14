@@ -1,0 +1,23 @@
+math{
+font-size:28px;
+margin-top:15px;
+}
+
+/* rezultatul final */
+.rezultat{
+color:#05386b;
+font-weight:bold;
+font-size:34px;
+}
+
+/* variabile */
+.variabila{
+color:#379683;
+font-style:italic;
+}
+
+/* costuri suplimentare */
+.cost{
+color:#e63946;
+font-weight:bold;
+}

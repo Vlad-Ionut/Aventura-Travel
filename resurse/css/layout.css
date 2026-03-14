@@ -1,0 +1,75 @@
+
+.grid-pagina{
+display:grid;
+gap:20px;
+padding:20px;
+
+grid-template-columns:1fr 1fr 1fr 1fr;
+
+grid-template-areas:
+
+"zona1 zona1 zona1 zona1"
+"zona2 zona2 zona8 zona8"
+"zona3 zona6 zona8 zona8"
+"zona5 zona6 zona8 zona8"
+"zona5 zona4 zona4 zona7";
+}
+
+.zona1{grid-area:zona1;}
+.zona2{grid-area:zona2;}
+.zona3{grid-area:zona3;}
+.zona4{grid-area:zona4;}
+.zona5{grid-area:zona5;}
+.zona6{grid-area:zona6;}
+.zona7{grid-area:zona7;}
+.zona8{grid-area:zona8;}
+
+.grid-pagina section{
+background:white;
+padding:15px;
+border:2px solid var(--culoare-accent);
+border-radius:10px;
+}
+
+@media (max-width:1000px){
+
+.grid-pagina{
+
+grid-template-columns:1fr 1fr;
+
+grid-template-areas:
+
+"zona1 zona1"
+"zona2 zona3"
+"zona4 zona5"
+"zona6 zona7"
+"zona8 zona8";
+
+}
+
+}
+
+
+
+@media (max-width:600px){
+
+.grid-pagina{
+
+grid-template-columns:1fr;
+
+grid-template-areas:
+
+"zona1"
+"zona2"
+"zona3"
+"zona4"
+"zona5"
+"zona6"
+"zona7"
+"zona8";
+
+}
+
+}
+
+
