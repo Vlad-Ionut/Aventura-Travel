@@ -4,12 +4,68 @@
 	--culoare-accent:#379683;
 	--culoare-highlight:#00FFBF;
 	--culoare-text:#F5F5F5;
+
+	/* variabile pentru layout */
+	--page-side-padding:4rem;
+	--zone-padding:1.25rem;
+	--grid-gap:20px;
+
+	/* variabile pentru elemente media */
+	--media-width:100%;
+	--media-max-width:600px;
+	--media-min-width:220px;
 }
 
 body{
 font-family: "Oswald", sans-serif;
+margin:0;
+background-color:var(--culoare-background);
+padding-left:var(--page-side-padding);
+padding-right:var(--page-side-padding);
 }
 
 h1, h2{
 font-family: "Archivo Black", sans-serif;
+}
+
+header, footer{
+background-color:var(--culoare-principala);
+color:var(--culoare-text);
+padding:var(--zone-padding);
+border-radius:10px;
+box-shadow:0 4px 12px rgba(0,0,0,0.2);
+margin-bottom:20px;
+}
+
+main{
+margin:20px 0;
+}
+
+main img,
+main iframe,
+main embed,
+main video,
+footer img,
+footer iframe{
+width:var(--media-width);
+max-width:var(--media-max-width);
+min-width:var(--media-min-width);
+}
+
+@media (max-width:1000px){
+	:root{
+		--page-side-padding:2.5rem;
+		--grid-gap:16px;
+		--media-max-width:520px;
+		--media-min-width:200px;
+	}
+}
+
+@media (max-width:600px){
+	:root{
+		--page-side-padding:1rem;
+		--grid-gap:12px;
+		--media-max-width:100%;
+		--media-min-width:160px;
+	}
 }

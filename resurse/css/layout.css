@@ -1,7 +1,7 @@
 
 .grid-pagina{
 display:grid;
-gap:20px;
+gap:var(--grid-gap);
 padding:20px;
 
 grid-template-columns:1fr 1fr 1fr 1fr;
@@ -26,9 +26,10 @@ grid-template-areas:
 
 .grid-pagina section{
 background:white;
-padding:15px;
+padding:var(--zone-padding);
 border:2px solid var(--culoare-accent);
 border-radius:10px;
+box-shadow:0 2px 8px rgba(0,0,0,0.12);
 }
 
 @media (max-width:1000px){

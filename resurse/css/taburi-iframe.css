@@ -1,12 +1,13 @@
 .container-iframe{
 display:flex;
 align-items:flex-start;
-gap:0;
+gap:10px;
 }
 
 .container-iframe iframe{
-width:480px;
-height:270px;
+width:var(--media-width);
+max-width:var(--media-max-width);
+min-width:var(--media-min-width);
 border:6px solid rgb(0,12,120);
 background:white;
 }
