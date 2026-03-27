@@ -1,0 +1,18 @@
+nav{
+    /* butoane mai înguste pe ecrane medii */
+    --latime-buton:80px;
+}
+
+/* pe ecrane medii, la opțiunile principale arătăm doar icon-urile */
+ul.meniu div.imag-icon{
+    display: block;
+}
+
+ul.meniu div.text-icon{
+    display: none;
+}
+
+/* micșorăm textul din meniu pentru a încăpea mai bine */
+ul.meniu a{
+    font-size: 0.8rem;
+}

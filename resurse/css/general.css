@@ -1,9 +1,5 @@
 :root{
-	--culoare-principala:#05386B;
-	--culoare-background:#ACE0F9;
-	--culoare-accent:#379683;
-	--culoare-highlight:#00FFBF;
-	--culoare-text:#F5F5F5;
+	--margine-pagina:110px;
 
 	/* variabile pentru layout */
 	--page-side-padding:4rem;
@@ -17,28 +13,52 @@
 }
 
 body{
-font-family: "Oswald", sans-serif;
-margin:0;
-background-color:var(--culoare-background);
-padding-left:var(--page-side-padding);
-padding-right:var(--page-side-padding);
+	/* variabile de tema cromatica */
+	--culoare-principala:#05386B;
+	--culoare-background:#ACE0F9;
+	--culoare-accent:#379683;
+	--culoare-highlight:#00FFBF;
+	--culoare-text:#F5F5F5;
+	--culoare-contur:#05386B;
+	--culoare-fundal:#379683;
+	--culoarre-fundal:#379683;
+
+	font-family: "Oswald", sans-serif;
+	margin:0;
+	background-color:var(--culoare-background);
+	padding-left:var(--page-side-padding);
+	padding-right:var(--page-side-padding);
 }
 
 h1, h2{
 font-family: "Archivo Black", sans-serif;
 }
 
-header, footer{
+header{
+background-color:var(--culoare-principala);
+color:var(--culoare-text);
+padding:var(--zone-padding);
+border-top-right-radius: 0px;
+border-top-left-radius: 0px;
+border-bottom-left-radius: 10px;
+border-bottom-right-radius: 10px;
+box-shadow:0 4px 20px rgba(0,0,0,0.2);
+margin-top:0;
+}
+
+
+footer{
 background-color:var(--culoare-principala);
 color:var(--culoare-text);
 padding:var(--zone-padding);
 border-radius:10px;
-box-shadow:0 4px 12px rgba(0,0,0,0.2);
+box-shadow:0 4px 20px rgba(0,0,0,0.2);
 margin-bottom:20px;
 }
 
 main{
-margin:20px 0;
+margin-left:var(--margine-pagina);
+margin-right:var(--margine-pagina);
 }
 
 main img,
@@ -52,8 +72,9 @@ max-width:var(--media-max-width);
 min-width:var(--media-min-width);
 }
 
-@media (max-width:1000px){
+@media screen and (max-width:1000px){
 	:root{
+		--margine-pagina:60px;
 		--page-side-padding:2.5rem;
 		--grid-gap:16px;
 		--media-max-width:520px;
@@ -61,11 +82,24 @@ min-width:var(--media-min-width);
 	}
 }
 
-@media (max-width:600px){
+@media screen and (max-width:600px){
 	:root{
+		--margine-pagina:20px;
 		--page-side-padding:1rem;
 		--grid-gap:12px;
 		--media-max-width:100%;
 		--media-min-width:160px;
 	}
+}
+
+/* ascund complet scroll-bar-urile, dar pastrez derularea */
+html,
+body,
+*{
+	scrollbar-width:none; /* Firefox si derulabile interne */
+}
+
+*::-webkit-scrollbar{
+	width:0;
+	height:0;
 }

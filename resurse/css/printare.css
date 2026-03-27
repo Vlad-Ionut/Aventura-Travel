@@ -1,0 +1,155 @@
+@media print {
+	/* Pagini stanga/dreapta cu margini diferite */
+	@page :left {
+		margin-top: 2cm;
+		margin-bottom: 2cm;
+		margin-left: 3cm;
+		margin-right: 1cm;
+	}
+
+	@page :right {
+		margin-top: 2cm;
+		margin-bottom: 2cm;
+		margin-left: 1cm;
+		margin-right: 3cm;
+	}
+
+	/* Reset culori de fundal si umbre pentru a nu consuma cerneala */
+	body {
+		background: white !important;
+		color: black !important;
+		padding: 0 !important;
+		margin: 0 !important;
+		display: flex;
+		flex-direction: column;
+	}
+
+	header,
+	nav,
+	main,
+	footer {
+		box-shadow: none !important;
+		background: transparent !important;
+		margin: 0 auto;
+		width: 100%;
+	}
+
+	/* Titlul site‑ului centrat pe prima pagina */
+	header h1 {
+		text-align: center;
+	}
+
+	/* Meniul sub forma de lista verticala, fara submeniuri */
+	nav {
+		order: 2;
+		page-break-after: always;
+	}
+
+	header {
+		order: 1;
+	}
+
+	main {
+		order: 3;
+	}
+
+	footer {
+		order: 4;
+		page-break-before: always;
+	}
+
+	ul.meniu {
+		display: block !important;
+	}
+
+	ul.meniu > li {
+		display: block !important;
+		width: auto !important;
+		height: auto !important;
+		border: none !important;
+		text-align: left !important;
+		margin: 0.1cm 0;
+	}
+
+	/* ascundem submeniurile */
+	ul.meniu ul {
+		display: none !important;
+	}
+
+	/* linkurile ca text normal */
+	a,
+	a:visited,
+	a:active {
+		color: inherit !important;
+		text-decoration: none !important;
+	}
+
+	/* Gridul paginii afisat ca block ca sa nu se sectioneze celulele */
+	.grid-pagina {
+		display: block !important;
+		padding: 0 !important;
+	}
+
+	.grid-pagina section {
+		page-break-inside: avoid;
+		break-inside: avoid;
+		margin-bottom: 0.5cm;
+	}
+
+	/* Ascundem imaginile, videoclipurile, iframe-urile, elementele media si descrierile lor */
+	img,
+	video,
+	iframe,
+	embed,
+	object,
+	picture,
+	figure,
+	figcaption,
+	.container-iframe,
+	.taburi-iframe,
+	map {
+		display: none !important;
+	}
+
+	/* Linkul catre inceputul paginii ascuns la printare */
+	#link-top {
+		display: none !important;
+	}
+
+	/* Banner-ul din footer, afisat ca bara la baza primei pagini */
+	footer p#banner,
+	footer p.banner {
+		position: fixed;
+		bottom: 0.5cm;
+		left: 50%;
+		transform: translateX(-50%);
+		width: 70%;
+		text-align: center;
+		border: 4px inset black;
+		padding: 0.3cm 0.2cm;
+		margin: 0;
+		background: white;
+		page-break-after: avoid;
+	}
+
+	/* Watermark pe fiecare pagina, colt dreapta jos */
+	.watermark {
+		position: fixed;
+		bottom: 0.5cm;
+		right: 0.5cm;
+		width: 4cm;
+		height: 1cm;
+		border: 3px solid black;
+		border-radius: 10px;
+		text-align: center;
+		font-weight: bold;
+		opacity: 0.4;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		background: white;
+		box-sizing: border-box;
+		page-break-inside: avoid;
+	}
+}
+
