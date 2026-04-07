@@ -1,129 +1,136 @@
-nav{
-    --latime-buton: 120px;
-    --inaltime-buton: 40px;
-    background-color: var(--culoare-contur);
+nav ul.meniu > li > ul li, nav ul.meniu > li {
+  cursor: pointer;
+  width: 120px;
+  background-color: var(--culoare-fundal);
+  border: 1px solid var(--culoare-contur);
+  color: black;
+  text-align: center;
+  transition: all 1s linear;
 }
 
-ul.meniu, ul.meniu  ul{
-    list-style-type: none;
-    padding: 0;
-    margin: 0;
+nav {
+  --latime-buton: 120px;
+  --inaltime-buton: 30px;
+  background-color: var(--culoare-contur);
 }
-
-#hamburger, #ch-menu{
-    display: none;
+nav .text-icon,
+nav .imag-icon,
+nav .image-icon {
+  display: inline-block;
+  vertical-align: middle;
+  margin-left: 0.3rem;
 }
-
-.text-icon, .imag-icon, .image-icon{
-    display: inline-block;
-    vertical-align: middle;
-    margin-left: 0.3rem;
+nav ul.meniu,
+nav ul.meniu ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
 }
-
-ul.meniu{
-    display: flex;
-    position: relative;
+nav #hamburger,
+nav #ch-menu {
+  display: none;
 }
-
-
-ul.meniu  ul{
-    display: none;
-    animation: animatie_submeniu 1s linear;
-    transform-origin: center top;
+nav ul.meniu {
+  display: flex;
+  position: relative;
+}
+nav ul.meniu > li {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: var(--inaltime-buton);
+  line-height: var(--inaltime-buton);
+  position: relative;
+}
+nav ul.meniu > li:hover {
+  background-color: var(--culoare-contur);
+  color: white;
+}
+nav ul.meniu > li:hover > ul {
+  display: block;
+}
+nav ul.meniu > li > ul {
+  display: none;
+  animation: animatie_submeniu 1s linear;
+  transform-origin: center top;
+  position: absolute;
+  top: 100%;
+  left: 0;
+  z-index: 10;
+}
+nav ul.meniu > li > ul li {
+  position: relative;
+  height: auto;
+  line-height: normal;
+}
+nav ul.meniu > li > ul li a {
+  display: block;
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  color: inherit;
+}
+nav ul.meniu a {
+  text-decoration: none;
+  color: inherit;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.3rem;
+  width: 100%;
+  height: 100%;
+  line-height: normal;
 }
 
 @keyframes animatie_submeniu {
-    0%{
-        opacity: 0;
-        transform: scale(0,0);
-    }
-    50%{
-        transform: scale(0.5,1);
-    }
-    100%{
-        opacity: 1;
-        transform: scale(1,1);
-    }
-}
-
-/* animatia benzii cu gradient de sub buton (dreapta -> stanga) */
-@keyframes animatie_bara_nav {
-    0%{
-        background-position: 100% 0;   /* porneste cu partea mai deschisa spre dreapta */
-    }
-    100%{
-        background-position: 0 0;      /* gradientul aluneca spre stanga */
-    }
-}
-
-
-ul.meniu>li:hover ul{
-    display: block;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    z-index: 10;
-}
-
-
-ul.meniu li{
-    cursor: pointer;
-    width:var(--latime-buton);
-    background-color: var(--culoare-fundal);
-    border: 1px solid var(--culoare-contur);
-    color: black;
-    text-align: center;
-    position: relative;
-    /* text-decoration: none; */
-    /* margin-right: 10px; */
-    transition: all 1s linear;
-}
-
-ul.meniu>li{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    height:var(--inaltime-buton);
-    line-height: var(--inaltime-buton);
-}
-
-ul.meniu a{
-    text-decoration: none;
-    color: inherit;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.3rem;
-    width: 100%;
-    height: 100%;
-    line-height: normal;
-}
-
-ul.meniu li:hover{
-    background-color: var(--culoare-contur);
-    color: white;
-}
-
-/* Bara cu gradient care apare sub buton la hover (ecrane mari) */
-ul.meniu>li::after{
-    content: "";
-    position: absolute;
-    left: 0;
-    bottom: 0; /* chiar la marginea de jos a butonului */
-    width: 100%;
-    height: 6px;
-    /* gradient negru -> alb, ca in imagine */
-    background-image: linear-gradient(to right, #05386B 0%, #fff 100%);
-    background-size: 200% 100%;      /* de doua ori mai lat pentru a avea loc sa se miste */
-    background-position: 100% 0;     /* stare initiala: exact ca in poza cu alb spre dreapta */
-    background-repeat: no-repeat;
+  0% {
     opacity: 0;
-    transition: opacity 0.3s linear;
-    animation: none;
+    transform: scale(0, 0);
+  }
+  50% {
+    transform: scale(0.5, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+nav ul.meniu > li:nth-child(1) {
+  z-index: 9;
 }
 
-ul.meniu>li:hover::after{
-    opacity: 1;
-    /* la hover rulam animatia care deplaseaza gradientul de la dreapta la stanga */
-    animation: animatie_bara_nav 1s linear forwards;
+nav ul.meniu > li:nth-child(2) {
+  z-index: 8;
+}
+
+nav ul.meniu > li:nth-child(3) {
+  z-index: 7;
+}
+
+nav ul.meniu > li:nth-child(4) {
+  z-index: 6;
+}
+
+nav ul.meniu > li:nth-child(5) {
+  z-index: 5;
+}
+
+nav ul.meniu > li:nth-child(6) {
+  z-index: 4;
+}
+
+nav ul.meniu > li:nth-child(7) {
+  z-index: 3;
+}
+
+@media (max-width: 700px) {
+  .hamburger-bar.bar-1 {
+    animation-delay: 0s;
+  }
+  .hamburger-bar.bar-2 {
+    animation-delay: 0.3s;
+  }
+  .hamburger-bar.bar-3 {
+    animation-delay: 0.6s;
+  }
 }

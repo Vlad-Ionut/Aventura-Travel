@@ -1,0 +1,145 @@
+// Variabile SASS pentru valori repetitive
+$menu-button-width: 120px;
+$menu-button-height: 30px;
+$menu-gap: 0.3rem;
+$icon-margin-left: 0.3rem;
+$submenu-anim-duration: 1s;
+$submenu-anim-timing: linear;
+
+// Placeholder pentru stil comun al elementelor de meniu
+%menu-item-base {
+  cursor: pointer;
+  width: $menu-button-width;
+  background-color: var(--culoare-fundal);
+  border: 1px solid var(--culoare-contur);
+  color: black;
+  text-align: center;
+  transition: all 1s linear;
+}
+
+nav {
+  // variabile CSS specifice meniului
+  --latime-buton: #{$menu-button-width};
+  --inaltime-buton: #{$menu-button-height};
+  background-color: var(--culoare-contur);
+
+  .text-icon,
+  .imag-icon,
+  .image-icon {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: $icon-margin-left;
+  }
+
+  ul.meniu,
+  ul.meniu ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+  }
+
+  #hamburger,
+  #ch-menu {
+    display: none;
+  }
+
+  ul.meniu {
+    display: flex;
+    position: relative;
+
+    // top-level <li>
+    > li {
+      @extend %menu-item-base;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: var(--inaltime-buton);
+      line-height: var(--inaltime-buton);
+      position: relative;
+
+      &:hover {
+        background-color: var(--culoare-contur);
+        color: white;
+
+        > ul {
+          display: block;
+        }
+      }
+
+      // submeniuri
+      > ul {
+        display: none;
+        animation: animatie_submeniu $submenu-anim-duration $submenu-anim-timing;
+        transform-origin: center top;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        z-index: 10;
+
+        li {
+          @extend %menu-item-base;
+          position: relative;
+          // înălțime automată pentru texte lungi
+          height: auto;
+          line-height: normal;
+
+          a {
+            display: block;
+            width: 100%;
+            height: 100%;
+            text-decoration: none;
+            color: inherit;
+          }
+        }
+      }
+    }
+
+    // link-uri din meniul principal (inclusiv Contact)
+    a {
+      text-decoration: none;
+      color: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: $menu-gap;
+      width: 100%;
+      height: 100%;
+      line-height: normal;
+    }
+  }
+}
+
+// Animația rămâne la nivel global pentru a fi folosită și în alte locuri, dacă e nevoie
+@keyframes animatie_submeniu {
+  0% {
+    opacity: 0;
+    transform: scale(0, 0);
+  }
+  50% {
+    transform: scale(0.5, 1);
+  }
+  100% {
+    opacity: 1;
+    transform: scale(1, 1);
+  }
+}
+
+// Exemplu de utilizare a unei instrucțiuni repetitive SASS
+// (atribui un z-index descrescător elementelor din meniul principal)
+@for $i from 1 through 7 {
+  nav ul.meniu > li:nth-child(#{$i}) {
+    z-index: (10 - $i);
+  }
+}
+
+// Bonus: animatie esalonata pentru cele 3 bare din hamburger pe ecrane mici
+@media (max-width: 700px) {
+  // delay-urile diferite se genereaza cu un for
+  $delay-step: 0.3s;
+
+  @for $i from 1 through 3 {
+    .hamburger-bar.bar-#{$i} {
+      animation-delay: ($i - 1) * $delay-step;
+    }
+  }
+}

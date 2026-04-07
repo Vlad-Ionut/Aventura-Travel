@@ -1,0 +1,41 @@
+{
+  "name": "agentiedeturism",
+  "version": "1.0.0",
+  "description": "agentie_de_turism online",
+  "keywords": [
+    "agenție",
+    "de",
+    "turism",
+    "oferte",
+    "de",
+    "vacanță",
+    "pachete",
+    "turistice",
+    "city",
+    "break",
+    "destinații",
+    "turistice",
+    "vacanțe",
+    "ieftine"
+  ],
+  "homepage": "https://github.com/Vlad-Ionut/Aventura-Travel#readme",
+  "bugs": {
+    "url": "https://github.com/Vlad-Ionut/Aventura-Travel/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Vlad-Ionut/Aventura-Travel.git"
+  },
+  "license": "ISC",
+  "author": "Șalgău Vlad-Ionuț",
+  "type": "commonjs",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "ejs": "^5.0.1",
+    "express": "^5.2.1",
+    "sass": "^1.98.0"
+  }
+}

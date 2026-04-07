@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html  lang="ro">
+    <head>
+        <meta name="description" content="Aventura Travel - eroare">
+        <meta name="keywords" content=" eroare, pagina de eroare, mesaj de eroare, cod de eroare, problemă, soluție, contact, suport">
+        <title>Aventura Travel - eroare</title>
+        <link rel="stylesheet" type="text/css" href="/resurse/css/eroare.css">
+        <%- include("../fragmente/head.ejs");  %> 
+
+
+    </head>
+    <body>
+        
+    <%- include("../fragmente/header.ejs");  %> 
+
+    <main>
+        <div id="err-coloane">
+			<div id="err-imag">
+				<img src="<%- locals.imagine %>" />
+			</div>
+			<section>
+				<h2><%- locals.titlu %></h2>
+                <p><%- locals.text %></p>
+                <p>
+                    Dacă ai ajuns aici dintr-un link sau meniu, încearcă să revii la pagina principală sau să folosești
+                    navigarea de sus pentru a găsi informațiile dorite. Este posibil ca pagina să fi fost mutată, ștearsă
+                    sau să existe o eroare temporară de conexiune.
+                </p>
+                <p>
+                    Dacă problema persistă, ne poți scrie prin formularul de contact sau la adresa de e‑mail din subsolul
+                    paginii, menționând acțiunea pe care ai încercat să o faci și momentul apariției erorii. Echipa Aventura
+                    Travel va analiza situația și va încerca să o remedieze cât mai rapid.
+                </p>
+			</section>
+		</div>
+    </main>
+    
+    <%- include("../fragmente/footer.ejs");  %> 
+
+
+    </body>
+</html>

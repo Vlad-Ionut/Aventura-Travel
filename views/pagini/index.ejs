@@ -1,132 +1,31 @@
 <!DOCTYPE html>
 <html lang="ro">
 <head>
-    <meta charset="UTF-8">
+    
     <title>Aventura Travel</title>
-    <meta name="author" content="Șalgău Vlad-Ionuț">
     <meta name="keywords" content="agenție de turism, oferte de vacanță, pachete turistice,city break,destinații turistice,vacanțe ieftine">
     <meta name="description" content="Site-ul unei agenții de turism care oferă pachete turistice, destinații de vacanță, ghiduri de călătorie și oferte speciale pentru călători.">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="icon" type="image/png" sizes="96x96" href="/resurse/ico/favicon-96x96.png">
-    <link rel="icon" type="image/svg+xml" href="/resurse/ico/favicon.svg">
-    <link rel="shortcut icon" href="/resurse/ico/favicon.ico">
-    <link rel="apple-touch-icon" sizes="180x180" href="/resurse/ico/apple-touch-icon.png">
-    <meta name="apple-mobile-web-app-title" content="Aventura Travel">
-    <meta name="msapplication-TileColor" content="#05386b">
-    <link rel="manifest" href="/resurse/ico/site.webmanifest">
-
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gsta     tic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Manufacturing+Consent&family=Oswald:wght@200..700&family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.3.0/css/all.min.css" />
+    <%- include('../fragmente/head.ejs') %>
     
-    <link rel="stylesheet" href="/resurse/css/general.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/layout.css"  type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/formula_MathML.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/taburi-iframe.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/link-top.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/tabel.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/nav.css" type="text/css"/>
-    <link rel="stylesheet" href="/resurse/css/nav1000.css" type="text/css" media="screen and (max-width: 1000px)"/>
-    <link rel="stylesheet" href="/resurse/css/nav700.css" type="text/css" media="screen and (max-width: 700px)"/>
-    <link rel="stylesheet" href="/resurse/css/printare.css" type="text/css" media="print"/>
 
 
 
 
 </head>
 <body>
+    <%- include('../fragmente/header.ejs') %>
 
-
-        
-<nav>
-    <label id="hamburger" for="ch-menu">
-        <div class="hamburger-icon" aria-label="Meniu" role="button">
-            <span class="hamburger-bar bar-1"></span>
-            <span class="hamburger-bar bar-2"></span>
-            <span class="hamburger-bar bar-3"></span>
-        </div>
-    </label>
-    <input type="checkbox" id="ch-menu">
-<ul class="meniu">
-
-    <li>
-        <div class="text-icon" id="acasa">Acasa</div>
-        <div class="image-icon" id="acasa-mediu">
-        <span class="fas fa-regular fa-house"></span>
-        </div>
-        <ul>
-        <li><a href="#acasa">Bine ati venit</a></li>
-        <li><a href="#oferte">Oferte de vacanță</a></li>
-        <li><a href="#pachete">Pachete turistice</a></li>
-        <li><a href="#destinatii">Destinații populare</a></li>
-        <li><a href="#planificare">Planifică vacanța</a></li>
-        </ul>
-    </li>
-    <li>
-        <div class="text-icon">Inregistrare</div>
-        <div class="image-icon">
-            <span class="fas fa-regular fa-user"></span>
-        </div>
-        <ul>
-        <li><a href="#formular-inregistrare">Formular de înregistrare</a></li>
-        <li><a href="#beneficii">Beneficii</a></li>
-        </ul>
-    </li>
-    <li><div class="text-icon">Despre noi</div>
-        <div class="image-icon">
-            <span class="fas fa-regular fa-info-circle"></span>
-        </div>
-        <ul>
-        <li><a href="#descriere-site">Descriere site</a></li>
-        <li><a href="#utilizatori">Utilizatori</a></li>
-        <li><a href="#detalii-utilizatori">Detalii utilizatori</a></li>
-        </ul>
-    </li>
-    <li><div class="text-icon">Informații</div>
-        <div class="image-icon">
-            <span class="fas fa-regular fa-info"></span>
-        </div>
-        <ul>
-        <li><a href="#formula-cost">Calculul costului</a></li>
-        <li><a href="#ghid-vacanta">Ghid de vacanță</a></li>
-        <li><a href="#orar">Orar</a></li>
-        </ul>
-    </li>
-    <li><div class="text-icon">Destinații</div>
-        <div class="image-icon">
-            <span class="fas fa-regular fa-map-marker-alt"></span>
-        </div>
-        <ul>
-            <li><a href="#harta-europa">Harta Europei</a></li>
-            <li><a href="#playlist-videouri">Playlist destinații</a></li>
-            </ul>
-    </li>
-    <li><div class="text-icon">Evenimente</div>
-        <div class="image-icon">
-            <span class="fas fa-regular fa-calendar-alt"></span>
-        </div>
-        <ul>
-        <li><a href="#evenimente">Oferte speciale</a></li>
-        <li><a href="#video-destinatii">Videoclipuri destinații</a></li>
-        </ul>
-    </li>
-<li><a href="#"> Contact <i class="fa-regular fa-envelope"></i></a></li>
-
-</ul>
-</nav>
-<header>
-    <h1>Aventura Travel <i class="fa-solid fa-plane fa-beat" style="color: rgb(99, 230, 190);"></i> </h1>
-    <p class="slogan">Descoperă lumea cu noi!</p>
-</header>
+ 
 <main class="grid-pagina">
 
 <section id="acasa" class="zona1">
     <hgroup>
         <h1 >Bine ați venit la Aventura Travel ! </h1>
+      
         <p class="subtitlu">Agenția de turism cu oferte de neratat </p>
     </hgroup>
+      <p class="ip">IP-ul tău este: <%= ip %></p>
     <h2>Oferte de vacanță și pachete turistice</h2>
 
     
@@ -139,6 +38,21 @@
          <blockquote>
         „Călătoriile sunt singurul lucru pe care îl cumperi și te fac mai bogat.”
         </blockquote>
+        <div id="container-video">
+                <div id="centrare-video">
+                    <div id="clip-video">
+                        <div id="stil-video">
+                            <video width="320" height="240"  controls>
+                                <source src="resurse/video/travel.mp4" type="video/mp4">
+                                <source src="resurse/video/travel.ogv" type="video/ogv">
+                                <track default src="data:image/png;base64,V0VCVlRUIC0gQ2lvY29sYXTEgwoKMDA6MDAuMDAwIC0tPiAwMDowMy4wMDAgbGluZTowCkNpb2NvbGF0xIMhISEKCjAwOjAzLjAwMCAtLT4gMDA6MDcuMDAwIGxpbmU6MApNdWx0xIMgY2lvY29sYXTEgyEhISEKCjAwOjA5LjAwMCAtLT4gMDA6MTQuMDAwIGxpbmU6MApVcHMsIGFtIG11cmTEg3JpdCBtYXNhIQoKMDA6MTQuNTAwIC0tPiAwMDoxOS4wMDAgbGluZTowCk51IGNvbnRlYXrEgyEgQ2lvY29sYXTEg8SDxIPEg8SDxIMhCgo=" kind="captions" srclang="ro" label="romana">
+                                <track src="data:image/png;base64,V0VCVlRUIC0gQ2hvY29sYXRlDQoNCjAwOjAwLjAwMCAtLT4gMDA6MDMuMDAwDQpDaG9jb2xhdGUhISENCg0KMDA6MDMuMDAwIC0tPiAwMDowNy4wMDANCkxvdHMgb2YgY2hvY29sYXRlISEhIQ0KDQowMDowOS4wMDAgLS0+IDAwOjE0LjAwMA0KT3VwcywgdGFibGUgZ290IGRpcnR5IQ0KDQowMDoxNC41MDAgLS0+IDAwOjE5LjAwMA0KRG9lc24ndCBtYXR0ZXIhIENob2NvbGF0ZSEhIQ0KDQo=" kind="captions" srclang="en" label="engleza">
+                            </video>
+                        </div>
+                    </div>
+                </div>
+            </div>           
+
 </section>
 
     <section id="pachete" >
@@ -210,6 +124,19 @@
         <strong>oferte de vacanță</strong> și <strong>pachete turistice</strong> 
         pentru următoarea ta aventură.
     </p>
+    <p>
+        Pentru verificarea bugetului înainte de plecare, poți consulta cursul valutar actualizat pe
+        <a href="https://www.bnr.ro/Cursul-de-schimb-524.aspx" target="_blank" rel="noopener noreferrer">site-ul BNR</a>.
+    </p>
+    <p>
+        Îți oferim consultanță gratuită pentru alegerea perioadei ideale, a tipului de cazare și a transportului,
+        astfel încât să obții cel mai bun raport calitate-preț. Împreună stabilim bugetul, activitățile dorite și
+        îți propunem variante de vacanță adaptate stilului tău de călătorie.
+    </p>
+    <p>
+        Ne poți contacta oricând pentru recomandări personalizate sau pentru a modifica o rezervare existentă, iar
+        echipa Aventura Travel îți va răspunde rapid cu cele mai avantajoase opțiuni disponibile.
+    </p>
 </section>
 
 <section id="formula-cost">
@@ -256,6 +183,11 @@ unde:
        type="application/pdf"
        width="500"
        height="300">
+
+<p>
+    Pentru recomandări oficiale de călătorie, poți consulta și
+    <a href="https://www.mae.ro/travel-alerts" target="_blank" rel="noopener noreferrer">alertele de călătorie MAE</a>.
+</p>
 
 </section>
 
@@ -324,7 +256,22 @@ unde:
               <details>
                 <summary>Este necesară asigurarea de călătorie?</summary>
                 <p>Recomandăm tuturor clienților noștri să aibă o asigurare de călătorie pentru a acoperi orice neprevăzut pe durata călătoriei. Putem oferi asistență în alegerea unei asigurări potrivite nevoilor tale.</p>
-              </details>                      
+                            </details>
+
+                            <details>
+                                <summary>Pot modifica sau anula o rezervare?</summary>
+                                <p>Da. În funcție de condițiile fiecărui furnizor, poți modifica sau anula o rezervare. Te rugăm să ne contactezi cât mai repede pentru a verifica taxele sau restricțiile aplicabile.</p>
+                            </details>
+
+                            <details>
+                                <summary>Oferiți reduceri pentru grupuri sau familii?</summary>
+                                <p>Da, pentru grupuri, familii sau rezervări multiple putem negocia tarife speciale cu partenerii noștri și îți putem prezenta cele mai avantajoase oferte disponibile pentru perioada dorită.</p>
+                            </details>
+
+                            <details>
+                                <summary>Ce documente sunt necesare pentru călătorie?</summary>
+                                <p>Documentele diferă în funcție de destinație: carte de identitate sau pașaport valabil, eventual viză și asigurare de călătorie. La rezervare îți trimitem o listă cu documentele necesare pentru destinația aleasă.</p>
+                            </details>                      
         </section>
 
             <section id="orar" class="zona2">
@@ -512,78 +459,7 @@ allowfullscreen>
 
 
 </main>
-
-<footer id="contact">
-    <h2>Contactați-ne</h2>
-
-<address>
-
-<i class="fa-solid fa-phone"></i>Telefon:
-<a href="tel:+40123456789">+40 123 456 789</a>
-<br><br>
-
-<i class="fa-solid fa-map-marker-alt"></i>Adresă:Strada Vacanței 10,București, România
-<br><br>
-Locatia noastră pe Google Maps:
-        <iframe 
-        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2848.369546534364!2d26.1025!3d44.4358!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x40b1ff4e4f8c1b1d%3A0xdea39d41b3b7a4ce!2sAgenția%20noastră%20de%20turism!5e0!3m2!1sro!2sro!4v1614794985644!5m2!1sro!2sro" 
-        width="200" 
-        height="150" 
-        style="border:0;" 
-        allowfullscreen="" 
-        loading="lazy" 
-        referrerpolicy="no-referrer-when-downgrade">
-        </iframe>
-
-<br><br>
-
-<i class="fa-solid fa-at"></i>Email:
-<a href="mailto:contact@aventuratravel.ro">
-contact@aventuratravel.ro
-</a>
-<br><br>
-
-<i class="fa-brands fa-whatsapp"></i>WhatsApp:
-<a href="https://wa.me/40123456789" target="_blank">
-Trimite-ne un mesaj pe WhatsApp
-</a>
-
-</address>
-
-
-
-    <p>
-    Pentru mai multe informații despre destinații turistice vizitează
-    <a href="https://www.lonelyplanet.com" target="_blank">
-    Lonely Planet
-    </a>.
-    </p>
-
-    <p>
-    <a href="https://ro.wikipedia.org/wiki/Londra#Turism">
-    https://ro.wikipedia.org/wiki/<wbr>Londra#Turism
-    </a>
-    </p>
-
-    <a href="/resurse/imagini/calator-mare.jpg">
-    <img src="/resurse/imagini/calator-mic.jpg"
-     alt="Turist explorând un oraș"
-     title="Click pentru imaginea mare">
-    </a>
-
-    <p>
-    <a href="/resurse/imagini/calator-mare.jpg" download="aventura_travel.jpg">
-    Descarcă imaginea destinației
-    </a>
-    </p>
-
-    <a href="#acasa" id="link-top" data-tooltip="text informativ">
-    <span class="arrow">&#129081;</span>
-    </a>
-
-    <p><small>Copyright &copy; <time datetime="2026-03-07"> 07 martie 2026</time> </small></p>
-    <div class="watermark">Salgau Vlad-Ionut</div>
-</footer>
+    <%- include('../fragmente/footer.ejs') %>
 
 </body>
 </html>

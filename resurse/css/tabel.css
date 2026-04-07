@@ -27,6 +27,14 @@ color:var(--culoare-principala);
 color:var(--culoare-accent);
 }
 
+#tab-orar tbody td.exceptie-impara{
+    color:var(--culoare-principala);
+}
+
+#tab-orar tbody td.exceptie-para{
+    color:var(--culoare-accent);
+}
+
 #tab-orar tbody tr{
 transition:all 0.75s;
 }

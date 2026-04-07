@@ -1,0 +1,18 @@
+WEBVTT - Made with VTT Creator
+
+STYLE
+::cue {
+background: rgba(236, 239, 77, 0);
+color: #070000ff;
+text-shadow: 0 0 3px #000, 0 0 6px #000;
+font-size: 1.05em;
+}
+
+00:00.000 --> 00:03.000  align:middle line:0
+Explore the world with Aventura Travel !
+
+00:04.000 --> 00:08.000  align:middle line:-1
+Discover incredible destinations!
+Plan your next vacation with us.
+
+

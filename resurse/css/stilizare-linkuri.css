@@ -1,0 +1,52 @@
+/* Stilizare generala linkuri */
+
+/* culoare pentru linkurile vizitate, din schema cromatica (accent) */
+:root{
+	--culoare-link-vizitat: var(--culoare-accent);
+	--culoare-spot-link: rgba(0, 255, 191, 0.45); /* baza pt pata de culoare */
+}
+
+/* linkuri vizitate */
+a:visited{
+	color: var(--culoare-link-vizitat);
+}
+
+/* LINKURI EXTERNE (href incepe cu http) */
+a[href^="http"]{
+	position: relative;
+}
+
+a[href^="http"]::before{
+	content: "⮳"; /* simbolul cerut pentru linkurile externe */
+	display: inline-block;
+	margin-right: 0.3em;
+	font-size: 1.5em; /* cu 50% mai mare fata de fontul linkului (unitate relativa) */
+	line-height: 1;
+	font-family: "Segoe UI Symbol", "Arial Unicode MS", system-ui, sans-serif;
+	color: inherit;
+	transition: color 0.3s ease;
+}
+
+a[href^="http"]:hover::before{
+	color: var(--culoare-highlight);
+}
+
+/* EFECT "PATA DE CULOARE" PENTRU LINKURI DIN MAIN (nu din meniu) */
+
+main a{
+	position: relative;
+	z-index: 0;
+	text-decoration: none;
+	color: inherit;
+	background-image: radial-gradient(circle, var(--culoare-spot-link) 0%, var(--culoare-spot-link) 40%, transparent 80%, transparent 100%);
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 0% 0%;
+	transition: background-size 0.4s ease-out;
+}
+
+main a:hover{
+	/* facem pata mai "centrata" pe randul textului, nu pe toata zona */
+	background-size: 100% 2.5em;
+}
+
