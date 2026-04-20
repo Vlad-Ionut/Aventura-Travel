@@ -21,10 +21,13 @@
 
 <section id="acasa" class="zona1">
     <hgroup>
-        <h1 >Bine ați venit la Aventura Travel ! </h1>
-      
+        <div id="text">
+            <h1>Bine ați venit la Aventura Travel ! </h1>
+            <h1 id="text-reflectat">Bine ați venit la Aventura Travel ! </h1>
+        </div>
         <p class="subtitlu">Agenția de turism cu oferte de neratat </p>
     </hgroup>
+    <p><button class="btn btn-primary" >Buton bootstrap</button></p>
       <p class="ip">IP-ul tău este: <%= ip %></p>
     <h2>Oferte de vacanță și pachete turistice</h2>
 
@@ -57,6 +60,7 @@
 
     <section id="pachete" >
         <h3>Pachete turistice pentru orice tip de călător</h3>
+        <hr class="linie-decorativa">
         <p>
             Oferim o varietate de <strong>pachete turistice</strong>, inclusiv
             <i>city break</i> în marile capitale europene,
@@ -73,6 +77,8 @@
         <dd>Vizitarea mai multor destinații într-o singură excursie.</dd>
     </dl>
     </section>
+
+    
 
 <section id="destinatii" class="zona8"> 
     <h2>Destinații turistice populare</h2>
@@ -359,7 +365,8 @@ unde:
 <img src="/resurse/imagini/harta-europei.jpg"
      alt="Harta Europei"
      usemap="#hartaEuropa"
-     width="400">
+     width="400"
+     id="duotone">
 
 <map name="hartaEuropa">
 
@@ -455,6 +462,27 @@ allowfullscreen>
                 </ul>
 
             </section>
+  <section id="galerie-statica">
+        <h2>Galerie</h2>
+        <div id="grid-galerie">
+            <% for (let imag of imagini) { %>
+                <figure>
+                    <picture>
+                        <source srcset="<%= imag.fisier_mic %>" media="(max-width:700px)"/>
+                        <source srcset="<%= imag.fisier_mediu %>" media="(max-width:1200px)"/>
+                        <img src="<%= imag.fisier %>" alt="<%= imag.alternativ || imag.nume_imag %>" title="<%= imag.descriere_imag %>">
+                    </picture>
+                    <figcaption><%= imag.descriere_imag %></figcaption>
+                </figure>
+            <% } %>
+        </div>
+    </section>
+
+    <%- include("../fragmente/galerie_animata.ejs")  %>
+
+   
+
+
 
 
 

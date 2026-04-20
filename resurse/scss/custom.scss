@@ -1,0 +1,40 @@
+@use "../../node_modules/bootstrap/scss/bootstrap" with (
+  // schema cromatică pentru două teme principale
+  $primary: #0d6efd,            // albastru pentru bg primar / butoane
+  $secondary: #f59f00,          // galben cald pentru accente
+  $success: #2b8a3e,
+  $info: #228be6,
+
+  // culoare implicită a textului
+  $body-color: #151515,
+  $body-bg: #f5f7fb,
+
+  // dimensiuni de ecran diferite pentru ecrane medii și mari
+  $grid-breakpoints: (
+    xs: 0,
+    sm: 576px,
+    md: 880px,      // mutat mai sus decât implicitul (768px)
+    lg: 1240px,     // mutat mai sus decât implicitul (992px)
+    xl: 1400px,
+    xxl: 1600px
+  ),
+
+  // dimensiunea razelor de border
+  $border-radius: 0.75rem,
+  $border-radius-sm: 0.5rem,
+  $border-radius-lg: 1.25rem,
+  $btn-border-radius: 9999px,   // butoane "pill"
+
+  // dimensiunea literelor headingurilor
+  $h1-font-size: 2.6rem,
+  $h2-font-size: 2.1rem,
+  $h3-font-size: 1.7rem,
+
+  // familia de font implicită (folosește Oswald din Google Fonts deja încărcat)
+  $font-family-base: "Oswald", 
+  
+  // variabile suplimentare customizate
+  $btn-padding-y: 0.6rem,
+  $btn-padding-x: 1.5rem,
+  $link-decoration: none
+);

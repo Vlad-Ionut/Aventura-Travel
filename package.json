@@ -34,8 +34,10 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "bootstrap": "^5.3.8",
     "ejs": "^5.0.1",
     "express": "^5.2.1",
-    "sass": "^1.98.0"
+    "sass": "^1.99.0",
+    "sharp": "^0.34.5"
   }
 }

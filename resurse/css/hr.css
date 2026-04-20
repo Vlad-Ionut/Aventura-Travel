@@ -1,0 +1,30 @@
+/* efect-css-stilizare-hr: linie decorativa cu steluță centrală */
+hr.linie-decorativa{
+	border:0;
+	height:3px;
+	margin:2rem auto;
+	max-width:500px;
+	background:linear-gradient(to right,
+		#000 0,
+		#000 48%,
+		transparent 48%,
+		transparent 52%,
+		#000 52%,
+		#000 100%);
+	border-radius:999px;
+	position:relative;
+}
+
+hr.linie-decorativa::before{
+	content:"*";
+	position:absolute;
+	top:50%;
+	left:50%;
+	transform:translate(-50%,-50%);
+	font-size:1.5rem;
+	font-family:"Times New Roman", serif;
+	color:#888;
+	text-shadow:none;
+	background-color:#fff;
+	padding:0;
+}

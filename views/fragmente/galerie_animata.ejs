@@ -1,0 +1,29 @@
+    <section id="sectiune-galerie-animata">
+        <h2>Galerie animată</h2>
+        <p class="descriere-galerie">
+            <strong>Explorează</strong> câteva dintre cele mai populare destinații
+            <strong>Aventura Travel</strong>.
+            <br>
+            <span class="descriere-galerie-linie2">
+                Imaginile se derulează automat, dar poți reveni oricând pentru a descoperi altele noi.
+            </span>
+        </p>
+
+        <div id="galerie-animata" class="galerie-a">
+            <% if (locals.imagini && locals.imagini.length) { %>
+                <% for (let imag of locals.imagini) { %>
+                    <figure>
+                        <picture>
+                            <source srcset="<%- imag.fisier_mediu %>" media="(max-width:1000px)" />
+                            <img src="<%- imag.fisier %>" alt="<%- imag.alternativ %>">
+                        </picture>
+                        <figcaption><%- imag.descriere_imag %></figcaption>
+                    </figure>
+                <% } %>
+            <% } else { %>
+                <p class="fara-imagini">
+                    Momentan nu avem imagini disponibile în galerie. Revino curând pentru noi destinații!
+                </p>
+            <% } %>
+        </div>
+    </section>

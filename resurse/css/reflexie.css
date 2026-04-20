@@ -1,0 +1,68 @@
+/* Container pentru text + reflexie */
+#text {
+	position: relative;
+	display: inline-block;
+}
+
+#text h1 {
+	margin: 0;
+}
+
+/* Textul reflectat, poziționat dedesubt */
+#text-reflectat {
+	position:absolute;
+	left:0;
+	top:100%;
+	transform-origin:0 0;
+	/*conetaza ordinea transformarilor!*/
+	transform: rotateX(180deg) skew(-45deg) scaleY(0.5) translate(10px,-25px); 
+	opacity:0.55;
+
+	
+
+	/* mască pentru efect de unde eliptice / dâre pe apă */
+	mask-image: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.9) 0px,
+		rgba(0, 0, 0, 0.9) 6px,
+		transparent 10px,
+		transparent 16px
+	);
+	-webkit-mask-image: repeating-linear-gradient(
+		135deg,
+		rgba(0, 0, 0, 0.9) 0px,
+		rgba(0, 0, 0, 0.9) 6px,
+		transparent 10px,
+		transparent 16px
+	);
+	mask-size: 200% 40px;
+	-webkit-mask-size: 200% 40px;
+	mask-position: 0 0;
+	-webkit-mask-position: 0 0;
+	transition: opacity 0.3s ease;
+}
+
+#text, #text-reflectat {
+	font-size: 50px;
+	line-height: 50px;
+	font-weight: bold;
+}
+
+/* Animația de unde: deplasăm masca pentru a simula mișcarea apei */
+@keyframes unde-reflexie {
+	from {
+		mask-position: 0 0;
+		-webkit-mask-position: 0 0;
+	}
+	to {
+		mask-position: 100% 40px;
+		-webkit-mask-position: 100% 40px;
+	}
+}
+
+/* La hover pe text sau reflexie, pornește animația de unde continue */
+#text:hover #text-reflectat,
+#text-reflectat:hover {
+	animation: unde-reflexie 1.5s linear infinite;
+	opacity: 0.7;
+}

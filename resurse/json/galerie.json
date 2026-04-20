@@ -1,0 +1,103 @@
+{
+	"cale_galerie":"resurse/imagini/galerie",
+	"imagini": [
+		{
+			"cale_relativa":"alpi.png",
+			"nume_imag":"Alpi",
+			"alternativ":"Peisaj montan Alpi",
+			"descriere_imag":"Vacanță activă în Munții Alpi.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"asia.png",
+			"nume_imag":"Asia",
+			"alternativ":"City break în Asia",
+			"descriere_imag":"Orașe asiatice vibrante și cultură locală.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"bali.png",
+			"nume_imag":"Bali",
+			"alternativ":"Plajă exotică Bali",
+			"descriere_imag":"Relaxare pe plajele exotice din Bali.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"barcelona.png",
+			"nume_imag":"Barcelona",
+			"alternativ":"Vedere urbană Barcelona",
+			"descriere_imag":"City break la Barcelona, arhitectură și mare.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"caraibe.png",
+			"nume_imag":"Caraibe",
+			"alternativ":"Plajă în Caraibe",
+			"descriere_imag":"Sejur all inclusive în Insulele Caraibe.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"egipt.png",
+			"nume_imag":"Egipt",
+			"alternativ":"Piramide în Egipt",
+			"descriere_imag":"Descoperă istoria și misterele Egiptului.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"grecia.png",
+			"nume_imag":"Grecia",
+			"alternativ":"Insule grecești",
+			"descriere_imag":"Vacanță pe insulele Greciei.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"hawai.png",
+			"nume_imag":"Hawai",
+			"alternativ":"Plajă în Hawai",
+			"descriere_imag":"Destinație exotică în Pacific.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"italia.png",
+			"nume_imag":"Italia",
+			"alternativ":"Peisaj din Italia",
+			"descriere_imag":"Circuit prin cele mai frumoase orașe din Italia.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"masai-mara.png",
+			"nume_imag":"Masai Mara",
+			"alternativ":"Safari Masai Mara",
+			"descriere_imag":"Safari în rezervația Masai Mara.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"paris.png",
+			"nume_imag":"Paris",
+			"alternativ":"Turnul Eiffel Paris",
+			"descriere_imag":"City break romantic la Paris.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"patagonia.png",
+			"nume_imag":"Patagonia",
+			"alternativ":"Munți în Patagonia",
+			"descriere_imag":"Aventură în peisajele sălbatice din Patagonia.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"scandinavia.png",
+			"nume_imag":"Scandinavia",
+			"alternativ":"Fiorduri scandinave",
+			"descriere_imag":"Circuit prin țările nordice.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23]]
+		},
+		{
+			"cale_relativa":"transilvania.png",
+			"nume_imag":"Transilvania",
+			"alternativ":"Castel în Transilvania",
+			"descriere_imag":"Excursie în Transilvania, ținutul legendelor.",
+			"intervale_ore":[[2,7],[14,16],[22,23],[0,23],[19,21]]
+		}
+	]
+}
