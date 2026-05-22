@@ -1,0 +1,9 @@
+
+body:not(.dark){
+    background-color: var(--culoare-background, #7dd6ff) !important;
+}
+
+
+body.dark{
+    background-color: var(--culoare-background, #021a32) !important;
+}

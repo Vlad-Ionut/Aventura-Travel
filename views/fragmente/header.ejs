@@ -1,4 +1,4 @@
-       
+<script src="/resurse/js/tema.js"></script>   
 <nav>
     <label id="hamburger" for="ch-menu">
         <div class="hamburger-icon" aria-label="Meniu" role="button">
@@ -53,14 +53,19 @@
         <li><a href="#orar">Orar</a></li>
         </ul>
     </li>
-    <li><div class="text-icon">Destinații</div>
+    <li><div class="text-icon">Destinatii</div>
         <div class="image-icon">
             <span class="fas fa-regular fa-map-marker-alt"></span>
         </div>
         <ul>
+            <li><a href="/produse">Toate</a></li>
+            <li><a href="/produse?tip=cultural">Cultural</a></li>
+            <li><a href="/produse?tip=aventura">Aventura</a></li>
+            <li><a href="/produse?tip=relaxare">Relaxare</a></li>
+            <li><a href="/produse?tip=urban">Urban</a></li> 
             <li><a href="#harta-europa">Harta Europei</a></li>
             <li><a href="#playlist-videouri">Playlist destinații</a></li>
-            </ul>
+        </ul>
     </li>
     <li><div class="text-icon">Evenimente</div>
         <div class="image-icon">
@@ -75,7 +80,14 @@
 
 </ul>
 </nav>
-<header>
+<header  class="c1" id="h1">
+     <label> <span class="bi bi-sun-fill"></span></label>
+  
+        <label> <span class="fas fa-sun"></span></label>
+        <div class="form-check form-switch form-check-inline">
+         <input id="tema" class="btn btn-primary btn-toggle form-check-input form-switch" type="checkbox">
+          <label><span class="fas fa-moon"></span></label> </div>
+
     <h1>Aventura Travel <i class="fa-solid fa-plane fa-beat" style="color: rgb(99, 230, 190);"></i> </h1>
     <p class="slogan">Descoperă lumea cu noi!</p>
     <p>Ip: <%- locals.ip %></p>

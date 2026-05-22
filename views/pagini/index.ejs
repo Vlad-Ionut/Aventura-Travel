@@ -48,8 +48,8 @@
                             <video width="320" height="240"  controls>
                                 <source src="resurse/video/travel.mp4" type="video/mp4">
                                 <source src="resurse/video/travel.ogv" type="video/ogv">
-                                <track default src="data:image/png;base64,V0VCVlRUIC0gQ2lvY29sYXTEgwoKMDA6MDAuMDAwIC0tPiAwMDowMy4wMDAgbGluZTowCkNpb2NvbGF0xIMhISEKCjAwOjAzLjAwMCAtLT4gMDA6MDcuMDAwIGxpbmU6MApNdWx0xIMgY2lvY29sYXTEgyEhISEKCjAwOjA5LjAwMCAtLT4gMDA6MTQuMDAwIGxpbmU6MApVcHMsIGFtIG11cmTEg3JpdCBtYXNhIQoKMDA6MTQuNTAwIC0tPiAwMDoxOS4wMDAgbGluZTowCk51IGNvbnRlYXrEgyEgQ2lvY29sYXTEg8SDxIPEg8SDxIMhCgo=" kind="captions" srclang="ro" label="romana">
-                                <track src="data:image/png;base64,V0VCVlRUIC0gQ2hvY29sYXRlDQoNCjAwOjAwLjAwMCAtLT4gMDA6MDMuMDAwDQpDaG9jb2xhdGUhISENCg0KMDA6MDMuMDAwIC0tPiAwMDowNy4wMDANCkxvdHMgb2YgY2hvY29sYXRlISEhIQ0KDQowMDowOS4wMDAgLS0+IDAwOjE0LjAwMA0KT3VwcywgdGFibGUgZ290IGRpcnR5IQ0KDQowMDoxNC41MDAgLS0+IDAwOjE5LjAwMA0KRG9lc24ndCBtYXR0ZXIhIENob2NvbGF0ZSEhIQ0KDQo=" kind="captions" srclang="en" label="engleza">
+                                <track src="resurse/video/tracks/my_captions.vtt" kind="subtitles" srclang="ro" label="Română" default>
+                                 <track src="resurse/video/tracks/my_captions_en.vtt" kind="subtitles" srclang="en" label="Engleză" >
                             </video>
                         </div>
                     </div>
@@ -77,6 +77,10 @@
         <dd>Vizitarea mai multor destinații într-o singură excursie.</dd>
     </dl>
     </section>
+
+
+
+</section>
 
     
 
@@ -471,6 +475,7 @@ allowfullscreen>
                         <source srcset="<%= imag.fisier_mic %>" media="(max-width:700px)"/>
                         <source srcset="<%= imag.fisier_mediu %>" media="(max-width:1200px)"/>
                         <img src="<%= imag.fisier %>" alt="<%= imag.alternativ || imag.nume_imag %>" title="<%= imag.descriere_imag %>">
+                        
                     </picture>
                     <figcaption><%= imag.descriere_imag %></figcaption>
                 </figure>
@@ -479,6 +484,16 @@ allowfullscreen>
     </section>
 
     <%- include("../fragmente/galerie_animata.ejs")  %>
+    
+    <section class="text_pe_coloane">
+  <h2>Despre destinațiile noastre</h2>
+  <p>
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed non sapien at nisi bibendum placerat. 
+    Integer pulvinar, mauris vitae faucibus pretium, nisi orci tincidunt erat, a porta nisl odio eget est.
+    Curabitur at convallis mauris. Sed porta sapien a velit facilisis, ac scelerisque ligula hendrerit. 
+    Suspendisse potenti. Nullam volutpat metus ut odio tincidunt, nec suscipit leo fringilla.
+  </p>
+</section>
 
    
 

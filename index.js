@@ -3,6 +3,7 @@ const path= require("path");
 const sharp=require('sharp');
 const fs=require("fs");
 const sass=require("sass");
+const pg=require("pg");
 
 app= express();
 app.set("view engine", "ejs")
@@ -17,9 +18,78 @@ obGlobal={
     folderBackup: path.join(__dirname,"backup"),
 }
 
+client = new pg.Client({
+    database: "aventuratravel",
+    user: "vlad1",
+    password: "vlad1",
+    host: "localhost",
+    port: 5432,
+});
+client.connect();
+
+client.query("select * from pachete_turism where id>3", function(err, rez){
+    if (err){
+        console.log("Eroare la interogare", err)
+    }
+    else{
+        console.log(rez)
+    }
+})
+
 console.log("Folder index.js", __dirname);
 console.log("Folder curent (de lucru)", process.cwd());
 console.log("Cale fisier", __filename);
+
+// select * from unnest(enum_range(null::categ_prajitura))
+app.get("/produse", function(req, res){
+    let clauzaWhere="";
+    if (req.query.tip){
+        clauzaWhere=` where tip_turism='${req.query.tip}'`;
+    }
+    client.query(`select * from pachete_turism ${clauzaWhere}`, function(err, rez){
+    if (err){
+        console.log("Eroare la interogare", err)
+        afisareEroare(res,2)
+    }
+    else{
+        client.query("select * from unnest(enum_range(null::categorie_pachet))", function(err, rezOptiuni){
+            if (err){
+                afisareEroare(res,2)
+            }
+            else{
+                res.render("pagini/produse", {
+                produse: rez.rows,
+                optiuni: rezOptiuni.rows
+                });
+            }
+        })
+    }
+})
+});
+
+app.get("/produs/:id", function(req, res){
+    
+    client.query(`select * from pachete_turism where id=${req.params.id}`, function(err, rez){
+    if (err){
+        console.log("Eroare la interogare", err)
+        afisareEroare(res,2)
+    }
+    else{
+        if (rez.rowCount == 0){
+            afisareEroare(res,404,"Produs inexistent")
+        }
+        else{
+        res.render("pagini/produs", {
+            prod: rez.rows[0],
+            
+        })
+        }
+  }
+})
+});
+
+
+
 
 let vect_foldere=[ "temp", "logs", "backup", "fisiere_uploadate" ]
 for (let folder of vect_foldere){
@@ -32,11 +102,14 @@ for (let folder of vect_foldere){
 app.use("/resurse",express.static(path.join(__dirname, "resurse")));
 app.use("/dist",express.static(path.join(__dirname, "/node_modules/bootstrap/dist")));
 
+
+
 app.get("/favicon.ico", function(req, res){
     res.sendFile(path.join(__dirname,"resurse/imagini/favicon/favicon.ico"))
 });
 
 function filtreazaImaginiDupaOra(oraCurenta){
+  
     if (!obGlobal.obImagini || !Array.isArray(obGlobal.obImagini.imagini))
         return [];
 
@@ -52,7 +125,7 @@ function filtreazaImaginiDupaOra(oraCurenta){
 
             const start = interval[0];
             const end = interval[1];
-            if (oraCurenta >= start && oraCurenta <= end){
+            if (oraCurenta >= start && oraCurenta <= end){//
                 afiseaza = true;
                 break;
             }
@@ -203,6 +276,8 @@ function verificaSiIncarcaErori(){
     return erori;
 }
 
+
+
 function initErori(){
     let erori = verificaSiIncarcaErori();
     obGlobal.obErori = erori;
@@ -285,28 +360,30 @@ function verificaDateImagini(){
     }
 
     for (const imag of obGalerie.imagini){
-        if (!imag || typeof imag.cale_relativa !== "string"){
+        if (!imag || typeof imag.cale_relativa !== "string"){// verificam daca exista proprietatea cale_relativa si daca e string
             console.error("[IMAGINI] Un element din 'imagini' nu are proprietatea 'cale_relativa' (string). Intrarea completa este:", imag);
             continue;
         }
 
-        const caleFisierAbs = path.join(caleGalerieAbs, imag.cale_relativa);
-        if (!fs.existsSync(caleFisierAbs)){
-            console.error(`[IMAGINI] Fisierul imagine specificat in galerie.json nu exista: '${imag.cale_relativa}'. Cale cautata: ${caleFisierAbs}. Verificati 'cale_galerie' si 'cale_relativa' pentru aceasta imagine.`);
-        }
+       
     }
+
+   
 }
 
 verificaDateImagini();
 
 function initImagini(){
+    
     var continut= fs.readFileSync(path.join(__dirname,"resurse/json/galerie.json")).toString("utf-8");
 
     obGlobal.obImagini=JSON.parse(continut);
     let vImagini=obGlobal.obImagini.imagini;
-    let caleGalerie=obGlobal.obImagini.cale_galerie
+    let caleGalerie=obGlobal.obImagini.cale_galerie;
 
+    
     let caleAbs=path.join(__dirname,caleGalerie);
+    
     let caleAbsMediu=path.join(caleAbs, "mediu");
     let caleAbsMic=path.join(caleAbs, "mic");
     if (!fs.existsSync(caleAbsMediu))
@@ -316,17 +393,18 @@ function initImagini(){
     
     for (let imag of vImagini){
         let [numeFis, ext]=imag.cale_relativa.split(".");
+        //cai pt server
         let caleFisAbs=path.join(caleAbs,imag.cale_relativa);
 		let caleFisMicAbs=path.join(caleAbsMic, numeFis+".webp");
 		let caleFisMediuAbs=path.join(caleAbsMediu, numeFis+".webp");
 
-		if (!fs.existsSync(caleFisMicAbs)){
+		if (!fs.existsSync(caleFisMicAbs)){ 
 			sharp(caleFisAbs).resize(200).toFile(caleFisMicAbs);
 		}
 		if (!fs.existsSync(caleFisMediuAbs)){
 			sharp(caleFisAbs).resize(400).toFile(caleFisMediuAbs);
 		}
-
+        
 		imag.fisier_mic=path.join("/", caleGalerie, "mic", numeFis+".webp" );
 		imag.fisier_mediu=path.join("/", caleGalerie, "mediu", numeFis+".webp" );
 		imag.fisier=path.join("/", caleGalerie, imag.cale_relativa );
@@ -340,8 +418,8 @@ initImagini();
 function compileazaScss(caleScss, caleCss){
     if(!caleCss){
         // Bonus 4: suport și pentru fișiere cu mai multe puncte, ex. "stil.frumos.scss"
-        // path.parse(caleScss).name returnează numele fără ultima extensie, dar păstrează punctele intermediare
-        const infoScss = path.parse(caleScss); // { name: "a" } sau { name: "stil.frumos" }
+        
+        const infoScss = path.parse(caleScss); 
         caleCss = infoScss.name + ".css"; // ex. "stil.frumos.css"
     }
     
@@ -349,43 +427,54 @@ function compileazaScss(caleScss, caleCss){
         caleScss=path.join(obGlobal.folderScss,caleScss )
     if (!path.isAbsolute(caleCss))
         caleCss=path.join(obGlobal.folderCss,caleCss )
-    
+   
     let caleBackup=path.join(obGlobal.folderBackup, "resurse/css");
     if (!fs.existsSync(caleBackup)) {
         fs.mkdirSync(caleBackup,{recursive:true})
     }
     
-    // la acest punct avem cai absolute in caleScss si  caleCss
+    
 
     // Bonus 3: salvăm versiunile vechi în backup cu timestamp în nume
-    // ex: a.css -> a_1681124489791.css
+   
     if (fs.existsSync(caleCss)){
-        const infoFisCss = path.parse(caleCss); // { name: "a", ext: ".css" } sau { name: "stil.frumos", ext: ".css" }
+        // 
+        const infoFisCss = path.parse(caleCss); 
         const timestamp = Date.now();
         const numeFisCssBackup = `${infoFisCss.name}_${timestamp}${infoFisCss.ext}`;
-        fs.copyFileSync(
-            caleCss,
+        
+        fs.copyFileSync( 
+            caleCss, 
             path.join(obGlobal.folderBackup, "resurse/css", numeFisCssBackup)
         );
     }
+    
     rez=sass.compile(caleScss, {"sourceMap":true});
+    // console.log("Rezultat compilare", rez);
+
+    
     fs.writeFileSync(caleCss,rez.css)
     
 }
 
+//o sa am un vector de fisere din folderul scss
 
 //la pornirea serverului
-vFisiere=fs.readdirSync(obGlobal.folderScss);
+vFisiere=fs.readdirSync(obGlobal.folderScss);//face un vector de fisiere
 for( let numeFis of vFisiere ){
     if (path.extname(numeFis)==".scss"){
-        compileazaScss(numeFis);
+        compileazaScss(numeFis);//apelam functia de compilare pentru fiecare fisier scss din folder, care va genera cate un fisier css in folderul css
     }
 }
 
 
+// verica daca s-a modificat un fisier in folderul scss, o sa fie notificata atunci recompilam fisierul respectiv
 fs.watch(obGlobal.folderScss, function(eveniment, numeFis){
+    //are o functie callback care primeste evenimentul
     if (eveniment=="change" || eveniment=="rename"){
-        let caleCompleta=path.join(obGlobal.folderScss, numeFis);
+        //obtin calea catre fisier
+        let caleCompleta=path.join(obGlobal.folderScss, numeFis);// 
+        //si daca exista, atunci compilez fisierul respectiv
         if (fs.existsSync(caleCompleta)){
             compileazaScss(caleCompleta);
         }
@@ -445,9 +534,7 @@ app.get("/cale2/:a/:b",function(req,res){
     res.send(parseInt(req.params.a) + " + " + parseInt(req.params.b))
 });
 
-app.get("/cale2/:a/:b",function(req,res){
-    res.send(parseInt(req.params.a) + " + " + parseInt(req.params.b))
-});
+
 
 
 

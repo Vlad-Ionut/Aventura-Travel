@@ -15,7 +15,7 @@
 body{
 	/* variabile de tema cromatica */
 	--culoare-principala:#05386B;
-	--culoare-background:#ACE0F9;
+	--culoare-background:#7dd6ff;
 	--culoare-accent:#379683;
 	--culoare-highlight:#00FFBF;
 	--culoare-text:#F5F5F5;
@@ -25,9 +25,25 @@ body{
 
 	font-family: "Oswald", sans-serif;
 	margin:0;
-	background-color:var(--culoare-background);
+	background-color:#7dd6ff;
 	padding-left:var(--page-side-padding);
 	padding-right:var(--page-side-padding);
+}
+
+body.dark{
+  --culoare-principala:#05386B;
+  --culoare-background:#082037;
+  --culoare-accent:#379683;
+  --culoare-highlight:#00FFBF;
+  --culoare-text:#F5F5F5;
+  --culoare-contur:#072e56;
+  --culoare-fundal:#379683;
+  --cl-marcare:rgb(81,43,81,0.5);
+  --cl-light-t:rgba(255,255,255,0.2);
+  --cl-text:white;
+  text-shadow:0px 0px 2px black,0px 0px 1px black,0px 0px 1px black;
+  background-color:#021a32;
+  --gradient-body:linear-gradient(transparent, transparent 25%, rgba(255,255,255,0.5) 50%, transparent 75%, transparent);
 }
 
 h1, h2{

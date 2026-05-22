@@ -1,0 +1,99 @@
+/* Scrolling text (marquee) and background animation */
+
+/* Marquee horizontal: secțiune fluidă, evităm scrollbar-ul cu overflow hidden */
+.marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  position: relative;
+}
+.marquee {
+  display: inline-block;
+  white-space: nowrap;
+  will-change: transform;
+  font-size: 1.125rem;
+}
+.marquee-horizontal .marquee {
+  animation: marquee-h 12s linear infinite;
+}
+@keyframes marquee-h {
+  0% { transform: translateX(100%); }
+  50% { transform: translateX(-10%); }
+  100% { transform: translateX(-110%); }
+}
+
+/* Marquee vertical: afișăm o singură linie în container și mutăm pe verticală */
+.marquee-vertical {
+  height: 3rem;
+  overflow: hidden;
+  position: relative;
+}
+.marquee-vertical .marquee {
+  display: block;
+  animation: marquee-v 8s linear infinite;
+}
+@keyframes marquee-v {
+  0% { transform: translateY(100%); }
+  10% { transform: translateY(0%); }
+  45% { transform: translateY(0%); }
+  55% { transform: translateY(-100%); }
+  100% { transform: translateY(-100%); }
+}
+
+/* Responsive adjustments */
+@media (max-width: 700px) {
+  .marquee { font-size: 1rem; }
+  .marquee-vertical { height: 2.5rem; }
+}
+
+/* Background fix + image swap animation using pseudo-elements */
+.bg-anim {
+  position: relative;
+  min-height: 60vh;
+  display: block;
+  z-index: 0;
+  overflow: hidden;
+}
+.bg-anim::before,
+.bg-anim::after {
+  content: "";
+  position: fixed; /* fix față de viewport */
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: 100vh;
+  background-size: cover;
+  background-position: center center;
+  background-repeat: no-repeat;
+  z-index: -1; /* în spate */
+  opacity: 0;
+}
+
+/* CSS variables: --bg1, --bg2, and --bg-interval (în secunde) */
+.bg-anim::before { background-image: var(--bg1); }
+.bg-anim::after  { background-image: var(--bg2); }
+
+/* animație: schimbare de opacitate între before/after */
+@keyframes bg-fade {
+  0% { opacity: 1; }
+  45% { opacity: 1; }
+  50% { opacity: 0; }
+  95% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+/* rulăm animația pe pseudo-elemente; interval total = 2 * --bg-interval */
+.bg-anim::before {
+  animation: bg-fade calc(var(--bg-interval, 6s) * 2) linear infinite;
+}
+.bg-anim::after {
+  animation: bg-fade calc(var(--bg-interval, 6s) * 2) linear infinite;
+  animation-delay: calc(var(--bg-interval, 6s));
+}
+
+/* Conținutul paginii trebuie să stea deasupra pseudo-elementelor */
+.bg-anim > * { position: relative; z-index: 1; }
+
+/* Pe ecrane mici, păstrăm background-attachment: fixed doar pentru desktop */
+@media (min-width: 800px) {
+  .bg-anim { background-attachment: fixed; }
+}
