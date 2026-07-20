@@ -1,7 +1,7 @@
 {
   "name": "agentiedeturism",
-  "version": "1.0.0",
-  "description": "agentie_de_turism online",
+  "version": "2.0.0",
+  "description": "Aventura Travel — agenție de turism online cu auth, rezervări, plăți, AI chatbot, hartă",
   "keywords": [
     "agenție",
     "de",
@@ -31,14 +31,29 @@
   "type": "commonjs",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node index.js",
+    "dev": "node index.js",
+    "db:init": "PGPASSWORD=vlad1 psql -h localhost -U vlad1 -d aventuratravel -f sql/schema.sql && PGPASSWORD=vlad1 psql -h localhost -U vlad1 -d aventuratravel -f sql/seed.sql",
+    "test": "node scripts/smoke-test.js"
   },
   "dependencies": {
+    "bcryptjs": "^3.0.2",
+    "body-parser": "^2.2.0",
     "bootstrap": "^5.3.8",
+    "chart.js": "^4.5.0",
+    "cookie-parser": "^1.4.7",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "ejs": "^5.0.1",
     "express": "^5.2.1",
+    "express-session": "^1.18.1",
+    "jsonwebtoken": "^9.0.2",
+    "method-override": "^3.0.0",
+    "multer": "^2.0.1",
+    "nodemailer": "^7.0.3",
     "pg": "^8.21.0",
     "sass": "^1.99.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "uuid": "^11.1.0"
   }
 }

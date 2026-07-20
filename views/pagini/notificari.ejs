@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Notificări — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <h1>Notificări</h1>
+    <div id="lista-notif" class="lista-rezervari"></div>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script>
+(async () => {
+  const list = await fetch('/api/notificari').then(r => {
+    if (r.status === 401) { location.href = '/login'; return []; }
+    return r.json();
+  });
+  const box = document.getElementById('lista-notif');
+  if (!list.length) { box.innerHTML = '<p>Nicio notificare.</p>'; return; }
+  box.innerHTML = list.map(n => `
+    <article class="rezervare-item ${n.citita ? '' : 'status-confirmata'}">
+      <div>
+        <h2>${n.subiect || n.tip}</h2>
+        <p>${n.mesaj || ''}</p>
+        <p class="muted">${new Date(n.data_creare).toLocaleString('ro-RO')}
+          ${n.email_trimis ? ' · email trimis' : ''}</p>
+      </div>
+      ${!n.citita ? `<button class="btn btn-outline" onclick="citeste(${n.id})">Marchează citită</button>` : ''}
+    </article>
+  `).join('');
+})();
+async function citeste(id) {
+  await fetch('/api/notificari/' + id + '/citita', { method: 'POST' });
+  location.reload();
+}
+</script>
+</body>
+</html>

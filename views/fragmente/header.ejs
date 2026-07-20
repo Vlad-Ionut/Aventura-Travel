@@ -1,4 +1,26 @@
-<script src="/resurse/js/tema.js"></script>   
+<script src="/resurse/js/tema.js"></script>
+<% if (typeof user !== 'undefined' && user) { %>
+<div class="user-bar">
+  <span>Salut, <strong><%= user.nume %></strong> (<%= user.rol %>)</span>
+  <a href="/rezervarile-mele">Rezervări</a>
+  <a href="/wishlist">♥ Wishlist</a>
+  <a href="/recomandari">Recomandări</a>
+  <a href="/notificari" id="link-notif">Notificări</a>
+  <% if (user.rol === 'administrator' || user.rol === 'angajat') { %>
+  <a href="/admin">Admin</a>
+  <% } %>
+  <a href="/logout">Logout</a>
+</div>
+<% } else { %>
+<div class="user-bar">
+  <a href="/login">Login</a>
+  <a href="/register">Register</a>
+  <a href="/cautare">Căutare</a>
+  <a href="/recomandari">Recomandări</a>
+  <a href="/chat">Chatbot AI</a>
+  <a href="/harta">Hartă</a>
+</div>
+<% } %>
 <nav>
     <label id="hamburger" for="ch-menu">
         <div class="hamburger-icon" aria-label="Meniu" role="button">
@@ -24,13 +46,19 @@
         </ul>
     </li>
     <li>
-        <div class="text-icon">Inregistrare</div>
+        <div class="text-icon">Cont</div>
         <div class="image-icon">
             <span class="fas fa-regular fa-user"></span>
         </div>
         <ul>
-        <li><a href="/despre#formular-inregistrare">Formular de înregistrare</a></li>
-        <li><a href="/despre#beneficii">Beneficii</a></li>
+        <% if (typeof user !== 'undefined' && user) { %>
+        <li><a href="/rezervarile-mele">Rezervările mele</a></li>
+        <li><a href="/wishlist">Wishlist</a></li>
+        <li><a href="/logout">Deconectare</a></li>
+        <% } else { %>
+        <li><a href="/login">Autentificare</a></li>
+        <li><a href="/register">Înregistrare</a></li>
+        <% } %>
         </ul>
     </li>
     <li><div class="text-icon">Despre noi</div>
@@ -38,19 +66,18 @@
             <span class="fas fa-regular fa-info-circle"></span>
         </div>
         <ul>
-        <li><a href="#descriere-site">Descriere site</a></li>
-        <li><a href="#utilizatori">Utilizatori</a></li>
-        <li><a href="#detalii-utilizatori">Detalii utilizatori</a></li>
+        <li><a href="/despre">Despre</a></li>
+        <li><a href="/chat">Chatbot AI</a></li>
         </ul>
     </li>
-    <li><div class="text-icon">Informații</div>
+    <li><div class="text-icon">Servicii</div>
         <div class="image-icon">
             <span class="fas fa-regular fa-info"></span>
         </div>
         <ul>
-        <li><a href="#formula-cost">Calculul costului</a></li>
-        <li><a href="#ghid-vacanta">Ghid de vacanță</a></li>
-        <li><a href="#orar">Orar</a></li>
+        <li><a href="/cautare">Căutare avansată</a></li>
+        <li><a href="/recomandari">Recomandări AI</a></li>
+        <li><a href="/harta">Hartă interactivă</a></li>
         </ul>
     </li>
     <li><div class="text-icon">Destinatii</div>
@@ -62,9 +89,8 @@
             <li><a href="/produse?tip=cultural">Cultural</a></li>
             <li><a href="/produse?tip=aventura">Aventura</a></li>
             <li><a href="/produse?tip=relaxare">Relaxare</a></li>
-            <li><a href="/produse?tip=urban">Urban</a></li> 
-            <li><a href="#harta-europa">Harta Europei</a></li>
-            <li><a href="#playlist-videouri">Playlist destinații</a></li>
+            <li><a href="/produse?tip=urban">Urban</a></li>
+            <li><a href="/harta">Hartă</a></li>
         </ul>
     </li>
     <li><div class="text-icon">Evenimente</div>
@@ -72,11 +98,11 @@
             <span class="fas fa-regular fa-calendar-alt"></span>
         </div>
         <ul>
-        <li><a href="#evenimente">Oferte speciale</a></li>
-        <li><a href="#video-destinatii">Videoclipuri destinații</a></li>
+        <li><a href="/produse">Oferte speciale</a></li>
+        <li><a href="/chat">Întreabă asistentul</a></li>
         </ul>
     </li>
-<li><a href="#"> Contact <i class="fa-regular fa-envelope"></i></a></li>
+<li><a href="/chat"> Contact <i class="fa-regular fa-envelope"></i></a></li>
 
 </ul>
 </nav>
@@ -90,5 +116,6 @@
 
     <h1>Aventura Travel <i class="fa-solid fa-plane fa-beat" style="color: rgb(99, 230, 190);"></i> </h1>
     <p class="slogan">Descoperă lumea cu noi!</p>
-    <p>Ip: <%- locals.ip %></p>
+    <% if (typeof ip !== 'undefined') { %><p>Ip: <%- ip %></p><% } %>
 </header>
+<link rel="stylesheet" href="/resurse/css/app-features.css">

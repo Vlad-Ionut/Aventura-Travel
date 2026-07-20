@@ -4,4 +4,7 @@ logs/
 temp/
 fisiere_uploadate/
 backup/
+.env
+*.log
+.DS_Store
 

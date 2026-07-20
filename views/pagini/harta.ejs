@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Hartă interactivă — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <h1>Hartă interactivă</h1>
+    <p>Hoteluri, aeroporturi și obiective turistice pentru destinațiile noastre.</p>
+    <div class="harta-filtre">
+        <label><input type="checkbox" data-tip="hotel" checked> Hoteluri</label>
+        <label><input type="checkbox" data-tip="aeroport" checked> Aeroporturi</label>
+        <label><input type="checkbox" data-tip="obiectiv" checked> Obiective</label>
+        <label><input type="checkbox" data-tip="pachet" checked> Pachete</label>
+    </div>
+    <div id="harta-globala" class="harta-full"></div>
+    <aside id="harta-info" class="harta-info muted">Selectează un marker pe hartă.</aside>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script src="/resurse/js/harta.js"></script>
+</body>
+</html>
