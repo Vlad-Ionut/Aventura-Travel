@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Panou Admin — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+    <script src="/vendor/chart.js/chart.umd.js"></script>
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page admin-page">
+    <h1>Panou <%= user.rol === 'administrator' ? 'Administrator' : 'Angajat' %></h1>
+    <nav class="admin-tabs">
+        <button type="button" data-tab="dashboard" class="active">Dashboard</button>
+        <button type="button" data-tab="pachete">Pachete</button>
+        <button type="button" data-tab="rezervari">Rezervări</button>
+        <% if (user.rol === 'administrator') { %><button type="button" data-tab="utilizatori">Utilizatori</button><% } %>
+        <button type="button" data-tab="recenzii">Recenzii</button>
+        <% if (user.rol === 'administrator') { %><button type="button" data-tab="rapoarte">Rapoarte</button><% } %>
+    </nav>
+
+    <section id="tab-dashboard" class="admin-tab active">
+        <div class="stat-grid" id="stat-cards"></div>
+        <div class="charts-grid">
+            <div><h3>Rezervări / lună</h3><canvas id="chart-rezervari"></canvas></div>
+            <div><h3>Venituri / lună</h3><canvas id="chart-venituri"></canvas></div>
+            <div><h3>Destinații populare</h3><canvas id="chart-dest"></canvas></div>
+        </div>
+    </section>
+
+    <section id="tab-pachete" class="admin-tab">
+        <h2>Gestionare pachete</h2>
+        <details class="admin-form-wrap">
+            <summary>+ Adaugă pachet nou</summary>
+            <form id="form-pachet" class="app-form grid-form">
+                <label>Destinație <input name="destinatie" required></label>
+                <label>Țară <input name="tara"></label>
+                <label>Oraș <input name="oras"></label>
+                <label>Preț <input name="pret" type="number" required></label>
+                <label>Reducere % <input name="reducere_procent" type="number" value="0"></label>
+                <label>Durată zile <input name="durata_zile" type="number" required></label>
+                <label>Tip
+                    <select name="tip_turism"><option>cultural</option><option>aventura</option><option>relaxare</option><option>urban</option></select>
+                </label>
+                <label>Categorie
+                    <select name="categorie"><option>standard</option><option>lux</option><option>familie</option><option>cuplu</option></select>
+                </label>
+                <label>Locuri <input name="locuri_disponibile" type="number" value="20"></label>
+                <label>Hotel <input name="hotel_nume"></label>
+                <label>Lat <input name="latitudine" type="number" step="any"></label>
+                <label>Lng <input name="longitudine" type="number" step="any"></label>
+                <label class="full">Descriere <textarea name="descriere"></textarea></label>
+                <label class="full">Facilități (virgule) <input name="facilitati"></label>
+                <button type="submit" class="btn btn-primary">Salvează</button>
+            </form>
+        </details>
+        <div id="lista-pachete-admin" class="admin-table-wrap"></div>
+        <div id="upload-zone" class="upload-zone" hidden>
+            <h3>Upload imagini pentru pachet #<span id="upload-pid"></span></h3>
+            <input type="file" id="upload-files" accept="image/*" multiple>
+            <div id="upload-preview" class="upload-preview"></div>
+            <button type="button" id="btn-upload" class="btn btn-primary">Încarcă & comprimă</button>
+        </div>
+    </section>
+
+    <section id="tab-rezervari" class="admin-tab">
+        <h2>Gestionare rezervări</h2>
+        <div id="lista-rez-admin" class="admin-table-wrap"></div>
+    </section>
+
+    <section id="tab-utilizatori" class="admin-tab">
+        <h2>Utilizatori</h2>
+        <div id="lista-useri" class="admin-table-wrap"></div>
+    </section>
+
+    <section id="tab-recenzii" class="admin-tab">
+        <h2>Moderare recenzii</h2>
+        <div id="lista-recenzii-admin" class="admin-table-wrap"></div>
+    </section>
+
+    <section id="tab-rapoarte" class="admin-tab">
+        <h2>Rapoarte</h2>
+        <div id="lista-raport" class="admin-table-wrap"></div>
+    </section>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script src="/resurse/js/admin.js"></script>
+</body>
+</html>

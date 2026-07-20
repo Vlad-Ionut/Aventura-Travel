@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Plată — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <section class="auth-card plata-card">
+        <h1>Plată online (simulare)</h1>
+        <p>Rezervare #<%= rezervare.id %> — <strong><%= rezervare.destinatie %></strong></p>
+        <p class="pret-nou"><%= rezervare.pret_total %> RON</p>
+        <form id="form-plata" class="app-form">
+            <label>Metodă
+                <select name="metoda">
+                    <option value="simulat">Simulat</option>
+                    <option value="stripe">Stripe (simulat)</option>
+                    <option value="paypal">PayPal (simulat)</option>
+                    <option value="netopia">Netopia (simulat)</option>
+                </select>
+            </label>
+            <label>Număr card <input name="numar" placeholder="4242 4242 4242 4242" value="4242424242424242"></label>
+            <label>Expirare <input name="exp" placeholder="12/28" value="12/28"></label>
+            <label>CVV <input name="cvv" placeholder="123" value="123" maxlength="4"></label>
+            <p class="muted">Test: 4242… = succes · 4000… = refuz</p>
+            <p id="plata-msg" class="form-error" hidden></p>
+            <button type="submit" class="btn btn-primary">Plătește acum</button>
+        </form>
+    </section>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script>
+document.getElementById('form-plata').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const msg = document.getElementById('plata-msg');
+    msg.hidden = true;
+    const btn = e.target.querySelector('button');
+    btn.disabled = true; btn.textContent = 'Se procesează...';
+    const res = await fetch('/api/plati', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            rezervare_id: <%= rezervare.id %>,
+            metoda: fd.get('metoda'),
+            card: { numar: fd.get('numar'), exp: fd.get('exp'), cvv: fd.get('cvv') }
+        })
+    });
+    const data = await res.json();
+    btn.disabled = false; btn.textContent = 'Plătește acum';
+    if (!data.ok) {
+        msg.textContent = data.plata?.detalii?.motiv || data.error || 'Plată eșuată';
+        msg.hidden = false;
+        return;
+    }
+    alert('Plată reușită! Ref: ' + data.plata.referinta + '\nConfirmare trimisă pe email.');
+    location.href = '/rezervarile-mele';
+});
+</script>
+</body>
+</html>

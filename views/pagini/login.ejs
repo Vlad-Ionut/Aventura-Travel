@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Autentificare — Aventura Travel</title>
+    <meta name="description" content="Autentificare Aventura Travel">
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <section class="auth-card">
+        <h1>Autentificare</h1>
+        <p class="muted">Conturi demo: admin@aventuratravel.ro / admin123 · client@aventuratravel.ro / client123</p>
+        <form id="form-login" class="app-form">
+            <label>Email <input type="email" name="email" required autocomplete="username"></label>
+            <label>Parolă <input type="password" name="parola" required autocomplete="current-password"></label>
+            <p id="login-eroare" class="form-error" hidden></p>
+            <button type="submit" class="btn btn-primary">Intră în cont</button>
+        </form>
+        <p>Nu ai cont? <a href="/register">Înregistrează-te</a></p>
+    </section>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script>
+document.getElementById('form-login').addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(e.target);
+    const err = document.getElementById('login-eroare');
+    err.hidden = true;
+    const res = await fetch('/api/auth/login', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ email: fd.get('email'), parola: fd.get('parola') })
+    });
+    const data = await res.json();
+    if (!res.ok) { err.textContent = data.error || 'Eroare'; err.hidden = false; return; }
+    const redirect = new URLSearchParams(location.search).get('redirect') || '/';
+    location.href = redirect;
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Wishlist — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+    <link rel="stylesheet" href="/resurse/css/produse.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <h1>♥ Vacanțe favorite</h1>
+    <% if (!items.length) { %>
+    <p>Wishlist-ul e gol. Adaugă pachete din pagina de detaliu.</p>
+    <% } %>
+    <div class="grid-pachete">
+        <% items.forEach(function(p){ %>
+        <article class="card-pachet">
+            <a href="/produs/<%= p.id %>">
+                <h2><%= p.destinatie %></h2>
+                <p><%= p.tip_turism %> · <%= p.pret_final %> RON</p>
+            </a>
+            <button type="button" class="btn btn-outline btn-rm-wish" data-id="<%= p.id %>">Elimină</button>
+        </article>
+        <% }) %>
+    </div>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script>
+document.querySelectorAll('.btn-rm-wish').forEach(btn => {
+    btn.addEventListener('click', async () => {
+        await fetch('/api/wishlist/' + btn.dataset.id, { method: 'DELETE' });
+        location.reload();
+    });
+});
+</script>
+</body>
+</html>

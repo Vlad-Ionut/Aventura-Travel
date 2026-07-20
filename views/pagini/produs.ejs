@@ -1,37 +1,177 @@
 <!DOCTYPE html>
-<html  lang="ro">
-    <head>
-        <meta name="description" content="Descoperă lumea cu Aventura travel, partenerul tău de încredere în aventuri inedite și experiențe de neuitat! Cu o pasiune nesfârșită pentru călătorii și o dedicare profundă pentru explorarea frumuseților ascunse ale lumii, agenția noastră de turism este aici pentru a transforma visul tău de a călători într-o realitate plină de amintiri prețioase.">
-        <meta name="keywords" content="agentie de turism,Aventura travel,vacanta,Pachete turistice,Atracții turistice,City break-uri,Europa, Elvetia,Viena">
-        
-        <title>Aventura travel - home</title>
-        <%- include("../fragmente/head") %>     
-        <link href="/resurse/css/produs.css" type="text/css" rel="stylesheet" />
-    </head>
-    <body>
-    <%- include("../fragmente/header") %>
+<html lang="ro">
+<head>
+    <title><%= prod.destinatie %> — Aventura Travel</title>
+    <meta name="description" content="<%= prod.descriere %>">
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/produs.css">
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page produs-page">
+    <article class="produs-detaliu">
+        <div class="produs-galerie">
+            <% const imgSrc = imagini.length ? imagini[0].cale : (prod.imagine || ''); %>
+            <img id="img-principala" src="<%= imgSrc.startsWith('/') ? imgSrc : '/resurse/imagini/pachete/' + imgSrc %>" alt="<%= prod.destinatie %>" onerror="this.src='/resurse/imagini/galerie/mare/1.jpg'">
+            <% if (imagini.length > 1) { %>
+            <div class="thumbs">
+                <% imagini.forEach(function(im){ %>
+                <button type="button" class="thumb" data-src="<%= im.cale.startsWith('/') ? im.cale : '/resurse/imagini/pachete/' + im.cale %>">
+                    <img src="<%= im.cale.startsWith('/') ? im.cale : '/resurse/imagini/pachete/' + im.cale %>" alt="<%= im.alt_text || '' %>" onerror="this.parentElement.style.display='none'">
+                </button>
+                <% }) %>
+            </div>
+            <% } %>
+        </div>
+        <div class="produs-info">
+            <p class="badge-tip"><%= prod.tip_turism %> · <%= prod.categorie %></p>
+            <h1><%= prod.destinatie %></h1>
+            <p class="rating-line">★ <%= Number(rating.medie).toFixed(1) %> <span class="muted">(<%= rating.total %> recenzii)</span></p>
+            <p><%= prod.descriere %></p>
+            <p class="pret-linie">
+                <% if (prod.reducere_procent > 0) { %>
+                <span class="pret-vechi"><%= prod.pret %> RON</span>
+                <span class="pret-nou"><%= prod.pret_final %> RON</span>
+                <span class="badge-reducere">−<%= prod.reducere_procent %>%</span>
+                <% } else { %>
+                <span class="pret-nou"><%= prod.pret %> RON</span>
+                <% } %>
+                <span class="muted">/ pers · <%= prod.durata_zile %> zile</span>
+            </p>
+            <p>Locuri disponibile: <strong><%= prod.locuri_disponibile %></strong>
+               <% if (prod.hotel_nume) { %> · Hotel: <%= prod.hotel_nume %><% } %></p>
+            <% if (prod.facilitati && prod.facilitati.length) { %>
+            <ul class="facilitati"><% prod.facilitati.forEach(function(f){ %><li><%= f %></li><% }) %></ul>
+            <% } %>
 
-    <main>
-        <section>
-            <h2>Pagină produs</h2>
-                <article id="art-produs">
-                    <h3><span class="nume"><%- locals.prod.destinatie %></span></h3>
-                    <p>Pret: <span class="pret"><%- locals.prod.pret %> </span></p>
-                    <p>Descriere: <span class="descriere"><%- locals.prod.descriere %> </span></p>
-                    <p>Destinatie: <span class="destinatie"><%- locals.prod.destinatie %> </span></p>
-                    <p>Obiective turistice: <span class="obiective_turistice"><%- locals.prod.obiective_turistice %> </span></p>
-                    <p>Persoane: <span class="persoane"><%- locals.prod.persoane %> </span></p>
-                    <p>Categorie: <span class="categorie"><%- locals.prod.categorie %> </span></p>
-                    <p>Pentru studenti: <span class="pt_studenti"><%- locals.prod.pt_studenti %> </span></p>
-                    <p>Data adăugare: <span class="data_adaugare"><%- locals.prod.data_adaugare %> </span></p>
-                    <figure class="imag-produs">
-                        <img  src="/resurse/imagini/produse/<%- locals.prod.imagine %>" alt="[imagine <%- locals.prod.destinatie %>]" />
-                    </figure>    
-                </article>
-            
-        </section>
-    </main>
+            <div class="actiuni-produs">
+                <% if (locals.user) { %>
+                <button type="button" id="btn-wishlist" class="btn btn-outline" data-id="<%= prod.id %>" data-in="<%= inWishlist ? '1' : '0' %>">
+                    <%= inWishlist ? '♥ În wishlist' : '♡ Adaugă la favorite' %>
+                </button>
+                <% } else { %>
+                <a class="btn btn-outline" href="/login?redirect=/produs/<%= prod.id %>">♡ Favorite (autentifică-te)</a>
+                <% } %>
+            </div>
 
-    <%- include("../fragmente/footer") %>
-    </body>
+            <section class="rezervare-box" id="rezervare">
+                <h2>Rezervă acum</h2>
+                <% if (!locals.user) { %>
+                <p><a href="/login?redirect=/produs/<%= prod.id %>#rezervare">Autentifică-te</a> pentru a rezerva.</p>
+                <% } else { %>
+                <form id="form-rezervare" class="app-form">
+                    <label>Perioadă
+                        <select name="perioada_id" required>
+                            <option value="">Alege perioada</option>
+                            <% perioade.forEach(function(p){ %>
+                            <option value="<%= p.id %>" data-locuri="<%= p.locuri %>">
+                                <%= p.data_start.toISOString().slice(0,10) %> → <%= p.data_end.toISOString().slice(0,10) %>
+                                (<%= p.locuri %> locuri<%= p.pret_special ? ', ' + p.pret_special + ' RON' : '' %>)
+                            </option>
+                            <% }) %>
+                        </select>
+                    </label>
+                    <label>Persoane <input type="number" name="numar_persoane" min="1" max="20" value="2" required></label>
+                    <label>Note <textarea name="note" rows="2"></textarea></label>
+                    <p id="rez-msg" class="form-error" hidden></p>
+                    <button type="submit" class="btn btn-primary">Rezervă</button>
+                </form>
+                <% } %>
+            </section>
+        </div>
+    </article>
+
+    <% if (prod.latitudine) { %>
+    <section class="sectiune-harta">
+        <h2>Locație pe hartă</h2>
+        <div id="harta-produs" class="harta-mini"></div>
+    </section>
+    <% } %>
+
+    <section class="sectiune-recenzii">
+        <h2>Recenzii</h2>
+        <% if (locals.user) { %>
+        <form id="form-recenzie" class="app-form form-inline">
+            <label>Rating
+                <select name="rating"><option>5</option><option>4</option><option>3</option><option>2</option><option>1</option></select>
+            </label>
+            <label class="flex-grow">Comentariu <input type="text" name="comentariu" placeholder="Impresiile tale..."></label>
+            <button type="submit" class="btn btn-primary">Trimite</button>
+        </form>
+        <% } %>
+        <div class="lista-recenzii">
+            <% if (!recenzii.length) { %><p class="muted">Nicio recenzie încă.</p><% } %>
+            <% recenzii.forEach(function(r){ %>
+            <blockquote class="recenzie">
+                <strong><%= r.nume %></strong> — <%= '★'.repeat(r.rating) %><%= '☆'.repeat(5-r.rating) %>
+                <p><%= r.comentariu %></p>
+            </blockquote>
+            <% }) %>
+        </div>
+    </section>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+<script>
+const pachetId = <%= prod.id %>;
+document.querySelectorAll('.thumb').forEach(btn => {
+    btn.addEventListener('click', () => {
+        document.getElementById('img-principala').src = btn.dataset.src;
+    });
+});
+const btnW = document.getElementById('btn-wishlist');
+if (btnW) btnW.addEventListener('click', async () => {
+    const inW = btnW.dataset.in === '1';
+    const res = await fetch('/api/wishlist/' + pachetId, { method: inW ? 'DELETE' : 'POST' });
+    if (res.ok) {
+        btnW.dataset.in = inW ? '0' : '1';
+        btnW.textContent = inW ? '♡ Adaugă la favorite' : '♥ În wishlist';
+    } else if (res.status === 401) location.href = '/login';
+});
+const formR = document.getElementById('form-rezervare');
+if (formR) formR.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(formR);
+    const msg = document.getElementById('rez-msg');
+    msg.hidden = true;
+    const body = {
+        pachet_id: pachetId,
+        perioada_id: parseInt(fd.get('perioada_id'), 10),
+        numar_persoane: parseInt(fd.get('numar_persoane'), 10),
+        note: fd.get('note')
+    };
+    const disp = await fetch(`/api/rezervari/disponibilitate?perioada_id=${body.perioada_id}&persoane=${body.numar_persoane}`).then(r => r.json());
+    if (!disp.disponibil) { msg.textContent = disp.motiv || 'Indisponibil'; msg.hidden = false; return; }
+    const res = await fetch('/api/rezervari', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(body)
+    });
+    const data = await res.json();
+    if (!res.ok) { msg.textContent = data.error || 'Eroare'; msg.hidden = false; return; }
+    location.href = '/plata/' + data.rezervare.id;
+});
+const formRec = document.getElementById('form-recenzie');
+if (formRec) formRec.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    const fd = new FormData(formRec);
+    const res = await fetch('/api/recenzii', {
+        method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ pachet_id: pachetId, rating: fd.get('rating'), comentariu: fd.get('comentariu') })
+    });
+    const data = await res.json();
+    alert(data.mesaj || data.error || 'OK');
+    if (res.ok) formRec.reset();
+});
+<% if (prod.latitudine) { %>
+const map = L.map('harta-produs').setView([<%= prod.latitudine %>, <%= prod.longitudine %>], 12);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { attribution: '© OSM' }).addTo(map);
+L.marker([<%= prod.latitudine %>, <%= prod.longitudine %>]).addTo(map).bindPopup('<%= prod.hotel_nume || prod.destinatie %>');
+<% poi.forEach(function(p){ %>
+L.marker([<%= p.latitudine %>, <%= p.longitudine %>]).addTo(map).bindPopup('<b><%= p.tip %></b>: <%= p.nume %>');
+<% }) %>
+<% } %>
+</script>
+</body>
 </html>

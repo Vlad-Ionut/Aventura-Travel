@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="ro">
+<head>
+    <title>Căutare pachete — Aventura Travel</title>
+    <%- include('../fragmente/head.ejs') %>
+    <link rel="stylesheet" href="/resurse/css/app-features.css">
+    <link rel="stylesheet" href="/resurse/css/produse.css">
+</head>
+<body>
+<%- include('../fragmente/header.ejs') %>
+<main class="app-page">
+    <h1>Motor de căutare</h1>
+    <form id="form-cautare" class="search-panel app-form">
+        <label>Destinație <input name="destinatie" type="text" placeholder="ex: Italia, Paris" value="<%= query.destinatie || '' %>"></label>
+        <label>Buget max (RON) <input name="buget_max" type="number" min="0" value="<%= query.buget_max || '' %>"></label>
+        <label>Buget min (RON) <input name="buget_min" type="number" min="0" value="<%= query.buget_min || '' %>"></label>
+        <label>Tip vacanță
+            <select name="tip">
+                <option value="">Toate</option>
+                <option value="cultural">Cultural</option>
+                <option value="aventura">Aventură</option>
+                <option value="relaxare">Relaxare</option>
+                <option value="urban">Urban / City break</option>
+            </select>
+        </label>
+        <label>Categorie
+            <select name="categorie">
+                <option value="">Toate</option>
+                <option value="standard">Standard</option>
+                <option value="lux">Lux</option>
+                <option value="familie">Familie</option>
+                <option value="cuplu">Cuplu</option>
+            </select>
+        </label>
+        <label>Persoane <input name="persoane" type="number" min="1" value="<%= query.persoane || 2 %>"></label>
+        <label>De la <input name="data_start" type="date"></label>
+        <label>Până la <input name="data_end" type="date"></label>
+        <button type="submit" class="btn btn-primary">Caută</button>
+    </form>
+    <p id="search-count" class="muted"></p>
+    <div id="search-results" class="grid-pachete"></div>
+</main>
+<%- include('../fragmente/footer.ejs') %>
+<script src="/resurse/js/cautare.js"></script>
+</body>
+</html>
